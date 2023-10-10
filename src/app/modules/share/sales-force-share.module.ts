@@ -53,6 +53,7 @@ const COREUI_MODULES = [
   exports: [
     FormsModule,
     ReactiveFormsModule,
+    HttpClientModule,
     ...COREUI_MODULES
   ]
 })

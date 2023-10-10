@@ -7,14 +7,26 @@
 <hr />
 <ng-container *ngIf="props$ | async as props" fluid="true">
   <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [columnFilter]="true"
-    [items]="(usersData$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
+    [items]="(potentialDoctorData$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
     (itemsPerPageChange)="handleItemsPerPageChange($event)" [itemsPerPageOptions]="[5,10,20]"
     [itemsPerPageSelect]="true" [tableProps]="{ hover: true, striped: true, responsive: true }"
     [columnFilterValue]="props.columnFilterValue?? []" [sorterValue]="props.sorterValue"
-    [tableProps]="{ hover: true, striped: true, responsive: true }" [tableBodyProps]="{ align: 'middle' }"
+    [tableProps]="{ hover: true, striped: true, responsive: true }"
     (sorterValueChange)="handleSorterValueChange($event)" cleaner header>
-    
- =
+    <ng-template cTemplateId="tableData" let-columnName="columnName" let-item="item" let-tdContent="tdContent">
+      <td>
+        <ng-container [ngSwitch]="columnName">
+          <ng-container *ngSwitchDefault>
+            {{tdContent}}
+          </ng-container>
+          <ng-container *ngSwitchCase="'action'" class="py-2">
+            <button (click)="toggleDetails(item['_id'])" cButton color="primary" size="sm" variant="outline">
+              Start Follow-Up
+            </button>
+          </ng-container>
+        </ng-container>
+      </td>
+    </ng-template>
   </c-smart-table>
   <c-smart-pagination *ngIf="props.totalPages" [activePage]="props.activePage"
     (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>

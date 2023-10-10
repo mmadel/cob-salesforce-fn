@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IColumn, IColumnFilterValue, ISorterValue } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
-import { BehaviorSubject, combineLatest, debounceTime, map, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, map, Observable, retry, Subject, takeUntil, tap } from 'rxjs';
+import { PotentialDoctor } from '../models/potential.doctor';
+import { PotentialService } from '../services/potential.service';
 export interface IParams {
   activePage?: number;
   columnFilterValue?: IColumnFilterValue;
@@ -23,16 +25,30 @@ export interface IApiParams {
 })
 export class ListPotentialDoctorComponent implements OnInit {
 
-  constructor() { }
-  usersData$!: Observable<[]>;
+  constructor(private potentialService: PotentialService) { }
+  potentialDoctorData$!: Observable<[PotentialDoctor]>;
+  readonly #destroy$ = new Subject<boolean>();
   readonly columns: (string | IColumn)[] = [
     {
-      key: 'doctorName',
-      label: 'Doctor Name'
+      key: 'name',
+      label: 'Doctor Name',
+      _style: { width: '10%' },
+      filter: false,
+      sorter: false,
     },
     {
-      key: 'doctorNPI',
-      label: 'Doctor NPI'
+      key: 'npi',
+      label: 'Doctor NPI',
+      _style: { width: '10%' },
+      filter: false,
+      sorter: false,
+    },
+    {
+      key: 'action',
+      label: 'Action',
+      _style: { width: '5%' },
+      filter: false,
+      sorter: false,
     },
   ]
   readonly activePage$ = new BehaviorSubject(0);
@@ -82,6 +98,56 @@ export class ListPotentialDoctorComponent implements OnInit {
     this.apiParams$.next({ ...apiParams });
   }
   ngOnInit(): void {
+    this.activePage$.pipe(
+      takeUntil(this.#destroy$)
+    ).subscribe((page) => {
+      const limit = this.itemsPerPage$.value;
+      const offset = page - 1;
+      this.apiParams = { offset, limit };
+    });
+    this.itemsPerPage$.pipe(
+      distinctUntilChanged(),
+      takeUntil(this.#destroy$)
+    ).subscribe((limit) => {
+      const totalPages = Math.ceil(this.totalItems$.value / limit) ?? 1;
+      this.totalPages$.next(totalPages);
+    });
+    this.totalItems$.pipe(
+      distinctUntilChanged(),
+      takeUntil(this.#destroy$)
+    ).subscribe((totalItems) => {
+      const totalPages = Math.ceil(totalItems / this.itemsPerPage$.value) ?? 1;
+      this.totalPages$.next(totalPages);
+    });
+
+    this.totalPages$.pipe(
+      takeUntil(this.#destroy$)
+    ).subscribe((totalPages) => {
+      const activePage = this.activePage$.value > totalPages ? totalPages : this.activePage$.value;
+      this.setActivePage(activePage);
+    });
+
+    this.potentialDoctorData$ = this.potentialService.getPotentialDoctors(this.apiParams$).pipe(
+      retry({
+        delay: (error) => {
+          console.warn('Retry: ', error);
+          this.errorMessage$.next(error.message ?? `Error: ${JSON.stringify(error)}`);
+          this.loadingData$.next(false);
+          return this.retry$;
+        }
+      }),
+      tap((response) => {
+        this.totalItems$.next(response.number_of_matching_records);
+        if (response.number_of_records) {
+          this.errorMessage$.next('');
+        }
+        this.retry$.next(false);
+        this.loadingData$.next(false);
+      }),
+      map((response) => {
+        return response.records;
+      })
+    );
   }
   handleItemsPerPageChange(limit: number) {
     this.itemsPerPage$.next(limit);
