@@ -1,36 +1,18 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { IconModule, IconSetService } from '@coreui/icons-angular';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
-  AvatarModule,
-  BadgeModule,
-  BreadcrumbModule,
-  ButtonGroupModule,
-  ButtonModule,
-  CardModule,
-  DateRangePickerModule,
-  DropdownModule,
-  FooterModule,
-  FormModule,
-  GridModule,
-  HeaderModule,
-  ListGroupModule,
-  NavModule,
-  ProgressModule,
-  SharedModule,
-  SidebarModule,
-  TabsModule,
-  UtilitiesModule
-} from '@coreui/angular-pro';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-import { ToastrModule } from 'ngx-toastr';
-import {
-  AdminHeaderComponent, DefaultAdminLayoutComponent, DefaultFooterComponent, DefaultHeaderComponent, DefaultLayoutComponent
+  AdminHeaderComponent, 
+  DefaultAdminLayoutComponent, 
+  DefaultFooterComponent, 
+  DefaultHeaderComponent, 
+  DefaultLayoutComponent
 } from './core';
+import { SalesForceShareModule } from './modules/share/sales-force-share.module';
 const APP_CONTAINERS = [
   DefaultHeaderComponent,
   DefaultFooterComponent,
@@ -45,37 +27,8 @@ const ADMIN_APP_CONTAINERS = [
   declarations: [AppComponent, ...APP_CONTAINERS, ...ADMIN_APP_CONTAINERS],
   imports: [
     BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    AvatarModule,
-    BadgeModule,
-    BreadcrumbModule,
-    ButtonGroupModule,
-    ButtonModule,
-    CardModule,
-    DropdownModule,
-    FooterModule,
-    FormModule,
-    GridModule,
-    HeaderModule,
-    ListGroupModule,
-    NavModule,
-    ProgressModule,
-    SharedModule,
-    SidebarModule,
-    TabsModule,
-    UtilitiesModule,
-    ReactiveFormsModule,
-    IconModule,
     BrowserAnimationsModule,
-    FormsModule,
-    DateRangePickerModule,
-    ToastrModule.forRoot({
-      timeOut: 10000,
-      closeButton: true,
-      progressBar: true,
-      progressAnimation:'decreasing'
-    }),
+    AppRoutingModule,SalesForceShareModule
   ],
   providers: [],
   bootstrap: [AppComponent]

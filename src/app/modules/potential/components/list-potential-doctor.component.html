@@ -1,1 +1,25 @@
-<p>list-potential-doctor works!</p>
+<ngx-spinner></ngx-spinner>
+<c-row>
+  <c-col xs="12" class="mb-2">
+    <h1>Potential Doctors</h1>
+  </c-col>
+</c-row>
+<hr />
+<ng-container *ngIf="props$ | async as props" fluid="true">
+  <c-smart-table [columnSorter]="{resetable: true }" [columns]="columns" [columnFilter]="true"
+    [items]="(usersData$ | async) ?? []" [itemsPerPage]="props.itemsPerPage"
+    (itemsPerPageChange)="handleItemsPerPageChange($event)" [itemsPerPageOptions]="[5,10,20]"
+    [itemsPerPageSelect]="true" [tableProps]="{ hover: true, striped: true, responsive: true }"
+    [columnFilterValue]="props.columnFilterValue?? []" [sorterValue]="props.sorterValue"
+    [tableProps]="{ hover: true, striped: true, responsive: true }" [tableBodyProps]="{ align: 'middle' }"
+    (sorterValueChange)="handleSorterValueChange($event)" cleaner header>
+    
+ =
+  </c-smart-table>
+  <c-smart-pagination *ngIf="props.totalPages" [activePage]="props.activePage"
+    (activePageChange)="handleActivePageChange($event)" [pages]="props.totalPages"></c-smart-pagination>
+</ng-container>
+<ng-container *ngIf="errorMessage$ | async as errorMessage">
+  <hr>
+  <c-alert>{{errorMessage}}</c-alert>
+</ng-container>

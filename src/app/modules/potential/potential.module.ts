@@ -1,19 +1,27 @@
-import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-import { PotentialRoutingModule } from './potential-routing.module';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SmartPaginationModule, SmartTableModule } from '@coreui/angular-pro';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { SalesForceShareModule } from '../share/sales-force-share.module';
 import {
-ListPotentialDoctorComponent
-}from './index'
+  ListPotentialDoctorComponent
+} from './index';
+import { PotentialRoutingModule } from './potential-routing.module';
 
-const POTENTIAL_COMPONENT=[
+const POTENTIAL_COMPONENT = [
   ListPotentialDoctorComponent
 ]
 @NgModule({
   declarations: [POTENTIAL_COMPONENT],
   imports: [
     CommonModule,
-    PotentialRoutingModule
+    PotentialRoutingModule,
+    SalesForceShareModule,
+    SmartTableModule,
+    SmartPaginationModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })
 export class PotentialModule { }
