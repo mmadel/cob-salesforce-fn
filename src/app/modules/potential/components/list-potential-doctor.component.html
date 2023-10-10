@@ -40,7 +40,9 @@
     <h5 cModalTitle>Follow Up</h5>
     <button (click)="closeModal()" cButtonClose></button>
   </c-modal-header>
-  <c-modal-body>Woohoo, you are reading this text in a modal!</c-modal-body>
+  <c-modal-body>
+    <app-followup-creation></app-followup-creation>
+  </c-modal-body>
   <c-modal-footer>
     <button cButton color="primary">Save changes</button>
   </c-modal-footer>

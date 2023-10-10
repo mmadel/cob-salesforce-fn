@@ -1,0 +1,43 @@
+<c-container fluid>
+  <c-row class="justify-content-center">
+    <c-col class="col">
+      <form cForm #clinicCreateForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
+        <div class="form-group"  class="mb-3">
+          <c-date-picker closeOnSelect size="sm" cFormControl id="dateOfVisit" name="dateOfVisit"
+            name="autoAccidentDate" placeholder="Date Of Visit"></c-date-picker  >
+        </div>
+        <div class="form-group" class="mb-3">
+          <select cSelect sizing="sm" cFormControl name="impression" id="impression" >
+            <option value="null">Select Impression</option>
+            <option *ngFor="let impression of impressions | keyvalue" [value]="impression.value">
+              {{impression.key}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group" class="mb-3">
+          <c-input-group>
+            <input cFormControl id="contactName" name="contactName" placeholder="Contact Name" required />
+          </c-input-group>
+        </div>
+        <div class="form-group" class="mb-3">
+          <select cSelect sizing="sm" cFormControl name="contactPosition" id="contactPosition" >
+            <option value="null">Select Position</option>
+            <option *ngFor="let position of contactPositions | keyvalue" [value]="position.value">
+              {{position.key}}
+            </option>
+          </select>
+        </div>
+        <div class="form-group" class="mb-3">
+          <c-date-picker closeOnSelect size="sm" cFormControl id="nextFollowupDate" name="nextFollowupDate"
+            placeholder="Follow Up Date"></c-date-picker>
+        </div>
+        <div class="form-group" class="mb-3">
+          <c-input-group>
+            <textarea cFormControl id="feedback" name="feedback" placeholder="Feedback" required cols="200"  class="mb-3"></textarea>
+          </c-input-group>
+        </div>
+      </form>
+    </c-col>
+  </c-row>
+
+</c-container>

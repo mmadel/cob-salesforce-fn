@@ -1,0 +1,1 @@
+export * from './components/followup.create/followup-creation.component'
