@@ -20,7 +20,7 @@
             {{tdContent}}
           </ng-container>
           <ng-container *ngSwitchCase="'action'" class="py-2">
-            <button (click)="toggleDetails(item['_id'])" cButton color="primary" size="sm" variant="outline">
+            <button (click)="startFollowup(item['_id'])" cButton color="primary" size="sm" variant="outline">
               Start Follow-Up
             </button>
           </ng-container>
@@ -35,3 +35,13 @@
   <hr>
   <c-alert>{{errorMessage}}</c-alert>
 </ng-container>
+<c-modal id="followupmodal" #modalXl id="modalXl" size="xl" [visible]="followupVisible" (visibleChange)="handleLiveDemoChange($event)">
+  <c-modal-header>
+    <h5 cModalTitle>Follow Up</h5>
+    <button (click)="closeModal()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>Woohoo, you are reading this text in a modal!</c-modal-body>
+  <c-modal-footer>
+    <button cButton color="primary">Save changes</button>
+  </c-modal-footer>
+</c-modal>

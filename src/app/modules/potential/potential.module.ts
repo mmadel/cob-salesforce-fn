@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SmartPaginationModule, SmartTableModule } from '@coreui/angular-pro';
+import { ModalModule, SmartPaginationModule, SmartTableModule } from '@coreui/angular-pro';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SalesForceShareModule } from '../share/sales-force-share.module';
 import {
@@ -21,6 +21,7 @@ const POTENTIAL_COMPONENT = [
     SalesForceShareModule,
     SmartTableModule,
     SmartPaginationModule,
+    ModalModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })

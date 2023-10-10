@@ -26,6 +26,7 @@ export interface IApiParams {
 export class ListPotentialDoctorComponent implements OnInit {
 
   constructor(private potentialService: PotentialService) { }
+  public followupVisible = false;
   potentialDoctorData$!: Observable<[PotentialDoctor]>;
   readonly #destroy$ = new Subject<boolean>();
   readonly columns: (string | IColumn)[] = [
@@ -158,8 +159,8 @@ export class ListPotentialDoctorComponent implements OnInit {
     this.apiParams = { sort };
   }
   details_visible = Object.create({});
-  toggleDetails(item: any) {
-    this.details_visible[item] = !this.details_visible[item];
+  startFollowup(item: any) {
+    this.followupVisible = !this.followupVisible;
   }
   handleActivePageChange(page: number) {
     this.setActivePage(page);
@@ -167,5 +168,11 @@ export class ListPotentialDoctorComponent implements OnInit {
   setActivePage(page: number) {
     page = page > 0 && this.totalPages$.value + 1 > page ? page : 1;
     this.activePage$.next(page);
+  }
+  handleLiveDemoChange(event: any) {
+    this.followupVisible = event;
+  }
+  closeModal(){
+    this.followupVisible = !this.followupVisible;
   }
 }
