@@ -30,7 +30,6 @@ export class FollowupCreationComponent implements OnInit {
     }
   }
   resetError() {
-    console.log('resetError')
     this.errorMessage = null;
   }
   create() {
