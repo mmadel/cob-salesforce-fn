@@ -4,9 +4,19 @@ import { DefaultAdminLayoutComponent, DefaultLayoutComponent } from './core';
 
 const routes: Routes = [
   {
+    path: '',
+    redirectTo: 'administrator/dashboard',
+    pathMatch: 'full',
+  },
+  {
     path: 'administrator',
     component: DefaultAdminLayoutComponent,
     children: [
+      {
+        path: 'dashboard',
+        loadChildren: () =>
+          import('./modules/dashboard/dashboard.module').then((m) => m.DashboardModule)
+      },
       {
         path: 'potential',
         loadChildren: () =>
