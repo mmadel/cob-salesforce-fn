@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IColumn, IColumnFilterValue, ISorterValue } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, map, Observable, retry, Subject, takeUntil, tap } from 'rxjs';
 import { PotentialDoctor } from '../models/potential.doctor';
 import { PotentialService } from '../services/potential.service';
+import { FollowupCreationComponent } from './followup.create/followup-creation.component';
 export interface IParams {
   activePage?: number;
   columnFilterValue?: IColumnFilterValue;
@@ -24,7 +25,7 @@ export interface IApiParams {
   styleUrls: ['./list-potential-doctor.component.css']
 })
 export class ListPotentialDoctorComponent implements OnInit {
-
+  @ViewChild(FollowupCreationComponent) followupCreationComponent: FollowupCreationComponent;
   constructor(private potentialService: PotentialService) { }
   public followupVisible = false;
   potentialDoctorData$!: Observable<[PotentialDoctor]>;
@@ -173,6 +174,8 @@ export class ListPotentialDoctorComponent implements OnInit {
     this.followupVisible = event;
   }
   closeModal(){
+    this.followupCreationComponent.followupCreateForm.resetForm();
+    this.followupCreationComponent.errorMessage = null;
     this.followupVisible = !this.followupVisible;
   }
 }

@@ -1,6 +1,6 @@
 export enum ContactPosition {
-    Office_Manager,
-    Front_Desk,
-    Doctor,
-    Referral_Department
+    Office_Manager="Office Manager",
+    Front_Desk="Front Desk",
+    Doctor="Doctor",
+    Referral_Department="Referral Department"
 }

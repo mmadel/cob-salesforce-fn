@@ -1,5 +1,5 @@
 export enum Impression{
-    Good,
-    Neutral,
-    Not_Worth,
+    Good ="Good",
+    Neutral="Neutral",
+    Not_Worth="Not Worth",
 }
