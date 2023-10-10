@@ -4,27 +4,14 @@ import { DefaultAdminLayoutComponent, DefaultLayoutComponent } from './core';
 
 const routes: Routes = [
   {
-    path: '',
-    redirectTo: 'admin',
-    pathMatch: 'full',
-  },
-  {
-    path: '',
-    component: DefaultLayoutComponent,
-    data: {
-      title: 'Home'
-    },
-    children: [
-     
-    ]
-  },
-  {
-    path: 'admin',
+    path: 'administrator',
     component: DefaultAdminLayoutComponent,
-   
-   
     children: [
-   
+      {
+        path: 'potential',
+        loadChildren: () =>
+          import('./modules/potential/potential.module').then((m) => m.PotentialModule)
+      }
     ]
   },
 

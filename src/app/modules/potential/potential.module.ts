@@ -2,10 +2,15 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { PotentialRoutingModule } from './potential-routing.module';
+import {
+ListPotentialDoctorComponent
+}from './index'
 
-
+const POTENTIAL_COMPONENT=[
+  ListPotentialDoctorComponent
+]
 @NgModule({
-  declarations: [],
+  declarations: [POTENTIAL_COMPONENT],
   imports: [
     CommonModule,
     PotentialRoutingModule

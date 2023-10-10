@@ -15,6 +15,6 @@ export class DefaultAdminLayoutComponent implements OnInit {
     suppressScrollX: true,
   };
   ngOnInit(): void {
-    
+    this.navItems = adminNavItems;
   }
 }
