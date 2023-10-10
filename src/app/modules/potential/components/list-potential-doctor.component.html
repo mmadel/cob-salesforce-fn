@@ -35,7 +35,8 @@
   <hr>
   <c-alert>{{errorMessage}}</c-alert>
 </ng-container>
-<c-modal id="followupmodal" #modalXl id="modalXl" size="xl" [visible]="followupVisible" (visibleChange)="handleLiveDemoChange($event)">
+<c-modal id="followupmodal" #modalXl id="modalXl" size="xl" [visible]="followupVisible"
+  (visibleChange)="handleLiveDemoChange($event)">
   <c-modal-header>
     <h5 cModalTitle>Follow Up</h5>
     <button (click)="closeModal()" cButtonClose></button>
@@ -43,7 +44,8 @@
   <c-modal-body>
     <app-followup-creation></app-followup-creation>
   </c-modal-body>
-  <c-modal-footer>
-    <button cButton color="primary">Save changes</button>
-  </c-modal-footer>
+  <hr>
+  <div class="text-center mb-3">
+    <button cButton color="primary" (click)="save()">Save Follow Up</button>
+  </div>
 </c-modal>

@@ -178,4 +178,7 @@ export class ListPotentialDoctorComponent implements OnInit {
     this.followupCreationComponent.errorMessage = null;
     this.followupVisible = !this.followupVisible;
   }
+  save(){
+    this.followupCreationComponent.followupCreateForm.ngSubmit.emit();
+  }
 }
