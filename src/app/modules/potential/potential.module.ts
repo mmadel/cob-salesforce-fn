@@ -16,7 +16,7 @@ const POTENTIAL_COMPONENT = [
   FirstVisitCreateComponent
 ]
 @NgModule({
-  declarations: [POTENTIAL_COMPONENT, FollowupCreationComponent, FirstVisitCreateComponent],
+  declarations: [POTENTIAL_COMPONENT],
   imports: [
     CommonModule,
     PotentialRoutingModule,
