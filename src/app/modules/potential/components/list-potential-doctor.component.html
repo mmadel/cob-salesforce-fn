@@ -20,7 +20,7 @@
             {{tdContent}}
           </ng-container>
           <ng-container *ngSwitchCase="'action'" class="py-2">
-            <button (click)="startFollowup(item['_id'])" cButton color="primary" size="sm" variant="outline">
+            <button (click)="startFollowup(item)" cButton color="primary" size="sm" variant="outline">
               Start Follow-Up
             </button>
           </ng-container>
@@ -38,7 +38,7 @@
 <c-modal id="followupmodal" #modalXl id="modalXl" size="xl" [visible]="followupVisible"
   (visibleChange)="handleLiveDemoChange($event)">
   <c-modal-header>
-    <h5 cModalTitle>Follow Up</h5>
+    <h5 cModalTitle>Follow Up : <strong>{{selectedDoctor}}</strong></h5>
     <button (click)="closeModal()" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>

@@ -1,4 +1,4 @@
-export interface PotentialDoctor {
+export interface Doctor {
     id?: number;
     name?:string;
     npi?:string;

@@ -2,9 +2,9 @@ import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http'
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, debounceTime, distinctUntilChanged, Observable, retry, switchMap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Doctor } from '../../share/model/doctor';
 import { ClinicService } from '../../share/services/clinic.service';
 import { IApiParams } from '../components/list-potential-doctor.component';
-import { PotentialDoctor } from '../models/potential.doctor';
 const httpOptions = {
   // headers: new HttpHeaders({
   //   'Content-Type': 'application/json',
@@ -15,7 +15,7 @@ const httpOptions = {
 export interface IData {
   number_of_records: number;
   number_of_matching_records: number;
-  records: PotentialDoctor[];
+  records: Doctor[];
 }
 @Injectable({
   providedIn: 'root'

@@ -1,7 +1,5 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DatePickerModule, ModalModule, SmartPaginationModule, SmartTableModule } from '@coreui/angular-pro';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { SalesForceShareModule } from '../share/sales-force-share.module';

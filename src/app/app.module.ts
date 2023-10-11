@@ -1,8 +1,7 @@
-import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {
@@ -28,7 +27,13 @@ const ADMIN_APP_CONTAINERS = [
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    AppRoutingModule,SalesForceShareModule
+    AppRoutingModule,SalesForceShareModule,
+    ToastrModule.forRoot({
+      timeOut: 9000,
+      closeButton: true,
+      progressBar: true,
+      progressAnimation:'decreasing'
+    }),
   ],
   providers: [],
   bootstrap: [AppComponent]

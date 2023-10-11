@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { IColumn, IColumnFilterValue, ISorterValue } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, map, Observable, retry, Subject, takeUntil, tap } from 'rxjs';
-import { PotentialDoctor } from '../models/potential.doctor';
+import { Doctor } from '../../share/model/doctor';
 import { PotentialService } from '../services/potential.service';
 import { FollowupCreationComponent } from './followup.create/followup-creation.component';
 export interface IParams {
@@ -25,10 +25,11 @@ export interface IApiParams {
   styleUrls: ['./list-potential-doctor.component.css']
 })
 export class ListPotentialDoctorComponent implements OnInit {
+  selectedDoctor:string;
   @ViewChild(FollowupCreationComponent) followupCreationComponent: FollowupCreationComponent;
   constructor(private potentialService: PotentialService) { }
   public followupVisible = false;
-  potentialDoctorData$!: Observable<[PotentialDoctor]>;
+  potentialDoctorData$!: Observable<[Doctor]>;
   readonly #destroy$ = new Subject<boolean>();
   readonly columns: (string | IColumn)[] = [
     {
@@ -100,6 +101,7 @@ export class ListPotentialDoctorComponent implements OnInit {
     this.apiParams$.next({ ...apiParams });
   }
   ngOnInit(): void {
+    console.log('################')
     this.activePage$.pipe(
       takeUntil(this.#destroy$)
     ).subscribe((page) => {
@@ -160,7 +162,9 @@ export class ListPotentialDoctorComponent implements OnInit {
     this.apiParams = { sort };
   }
   details_visible = Object.create({});
-  startFollowup(item: any) {
+  startFollowup(item: Doctor) {
+    this.followupCreationComponent.selectedpotentialDoctor = item;
+    this.selectedDoctor = item.name +'-' +item.npi
     this.followupVisible = !this.followupVisible;
   }
   handleActivePageChange(page: number) {
@@ -171,6 +175,7 @@ export class ListPotentialDoctorComponent implements OnInit {
     this.activePage$.next(page);
   }
   handleLiveDemoChange(event: any) {
+    this.followupCreationComponent?.calculateDates();
     this.followupVisible = event;
   }
   closeModal(){
@@ -180,5 +185,6 @@ export class ListPotentialDoctorComponent implements OnInit {
   }
   save(){
     this.followupCreationComponent.followupCreateForm.ngSubmit.emit();
+    this.closeModal();
   }
 }

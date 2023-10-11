@@ -4,14 +4,11 @@
       <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
       <form cForm #followupCreateForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
         <div class="form-group" class="mb-3">
-          <small *ngIf="dateOfVisit.invalid && (dateOfVisit.dirty || dateOfVisit.touched)"
-            class="form-text text-danger">
-            Date Of Visit is required
-          </small>
-          <c-date-picker closeOnSelect size="sm" cFormControl id="dateOfVisit" name="dateOfVisit" required
+          <label>Date of visit</label>
+          <c-date-picker closeOnSelect size="sm" cFormControl id="dateOfVisit" name="dateOfVisit"
             placeholder="Date Of Visit"
             [ngClass]="{'is-invalid': dateOfVisit.invalid && (dateOfVisit.dirty || dateOfVisit.touched)}"
-            [(ngModel)]="followup.dateOfVisit_str" #dateOfVisit="ngModel"></c-date-picker>
+            [(ngModel)]="followup.dateOfVisit_str" #dateOfVisit="ngModel" disabled></c-date-picker>
         </div>
         <div class="form-group" class="mb-3">
           <small *ngIf="impression.invalid && (impression.dirty || impression.touched)" class="form-text text-danger">
@@ -49,13 +46,10 @@
           </select>
         </div>
         <div class="form-group" class="mb-3">
-          <small *ngIf="nextFollowupDate.invalid && (nextFollowupDate.dirty || nextFollowupDate.touched)"
-            class="form-text text-danger">
-            Next Followup Date is required
-          </small>
+          <label>Next follow-up date</label>
           <c-date-picker closeOnSelect size="sm" cFormControl id="nextFollowupDate" name="nextFollowupDate"
             placeholder="Follow Up Date" [(ngModel)]="followup.nextFollowupDate_str" #nextFollowupDate="ngModel"
-            required></c-date-picker>
+            disabled></c-date-picker>
         </div>
         <div class="form-group" class="mb-3">
           <small *ngIf="feedback.invalid && (feedback.dirty || feedback.touched)" class="form-text text-danger">
