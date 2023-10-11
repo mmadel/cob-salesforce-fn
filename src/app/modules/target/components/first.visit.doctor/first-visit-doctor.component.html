@@ -1,1 +1,27 @@
-<p>first-visit-doctor works!</p>
+<c-row>
+    <c-col xs="12">
+        <h1>First Visit Doctors</h1>
+    </c-col>
+</c-row>
+<hr />
+<table cTable hover [striped]="true">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Doctor Name</th>
+            <th scope="col">Doctor NPI</th>
+            <th scope="col">User Name</th>
+            <th scope="col">Next Followup Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let task of tasks; index as i;">
+            <th scope="row">{{i+1}}</th>
+            <td>{{task.doctorName}}</td>
+            <td>{{task.doctorNPI}}</td>
+            <td>{{task.userName}}</td>
+            <td>{{task.nextFollowupDate | date: 'MM/dd/yyyy'}}</td>
+
+        </tr>
+    </tbody>
+</table>

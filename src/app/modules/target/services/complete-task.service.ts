@@ -20,6 +20,7 @@ export class CompleteTaskService {
 
   public getCompletedFirstVisitTask(clinicId: string) {
     const completedFirstVisitTaskURL = this.baseUrl + '/complete/first/clinicId/' + clinicId
-    return this.httpClient.get(completedFirstVisitTaskURL)
+    return this.httpClient.get(completedFirstVisitTaskURL).pipe(
+      map((response: any) => <CompletedTask[]>response));
   }
 }
