@@ -21,6 +21,11 @@ const routes: Routes = [
         path: 'potential',
         loadChildren: () =>
           import('./modules/potential/potential.module').then((m) => m.PotentialModule)
+      },
+      {
+        path: 'target',
+        loadChildren: () =>
+          import('./modules/target/target-routing.module').then((m) => m.TargetRoutingModule)
       }
     ]
   },
