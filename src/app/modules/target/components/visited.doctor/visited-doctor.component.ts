@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { CompletedTask } from '../../model/completed.task.mode';
+import { CompleteTaskService } from '../../services/complete-task.service';
 
 @Component({
   selector: 'app-visited-doctor',
@@ -7,9 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VisitedDoctorComponent implements OnInit {
 
-  constructor() { }
+  clinicId: string = '1';
+  tasks:CompletedTask[];
+  constructor(private completeTaskService: CompleteTaskService) { }
 
   ngOnInit(): void {
+    this.completeTaskService.getCompletedFollowupTask(this.clinicId)
+    .subscribe((response) => {
+      console.log(response)
+      this.tasks = response;
+    }, (error) => {
+
+    })
   }
 
 }

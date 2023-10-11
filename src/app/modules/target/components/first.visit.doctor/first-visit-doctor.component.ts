@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CompleteTaskService } from '../../services/complete-task.service';
 
 @Component({
   selector: 'app-first-visit-doctor',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FirstVisitDoctorComponent implements OnInit {
 
-  constructor() { }
+  constructor(private completeTaskService:CompleteTaskService) { }
 
   ngOnInit(): void {
   }
