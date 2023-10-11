@@ -11,7 +11,13 @@ export class FollowupCreationService {
   constructor(private httpClient: HttpClient) { }
 
   create(followup: Followup) {
-    const createFollowupURL = this.baseUrl+ '/next'
+    const createFollowupURL = this.baseUrl + '/next'
+    const headers = { 'content-type': 'application/json' }
+    return this.httpClient.post(`${createFollowupURL}`, JSON.stringify(followup), { 'headers': headers, observe: 'response' })
+  }
+
+  createFirstVisit(followup: Followup) {
+    const createFollowupURL = this.baseUrl + '/first'
     const headers = { 'content-type': 'application/json' }
     return this.httpClient.post(`${createFollowupURL}`, JSON.stringify(followup), { 'headers': headers, observe: 'response' })
   }

@@ -3,6 +3,7 @@ import { IColumn, IColumnFilterValue, ISorterValue } from '@coreui/angular-pro/l
 import { BehaviorSubject, combineLatest, debounceTime, distinctUntilChanged, map, Observable, retry, Subject, takeUntil, tap } from 'rxjs';
 import { Doctor } from '../../share/model/doctor';
 import { PotentialService } from '../services/potential.service';
+import { FirstVisitCreateComponent } from './first.visit.create/first-visit-create.component';
 import { FollowupCreationComponent } from './followup.create/followup-creation.component';
 export interface IParams {
   activePage?: number;
@@ -27,6 +28,7 @@ export interface IApiParams {
 export class ListPotentialDoctorComponent implements OnInit {
   selectedDoctor:string;
   @ViewChild(FollowupCreationComponent) followupCreationComponent: FollowupCreationComponent;
+  @ViewChild(FirstVisitCreateComponent) firstVisitCreateComponent: FirstVisitCreateComponent;
   constructor(private potentialService: PotentialService) { }
   public followupVisible = false;
   public firstVisible = false;
@@ -183,6 +185,7 @@ export class ListPotentialDoctorComponent implements OnInit {
     this.followupVisible = event;
   }
   handleFirstVisitChange(event: any){
+    this.firstVisitCreateComponent?.calculateDates();
     this.firstVisible = event;
   }
   closeFirstVisitModal(){
@@ -196,5 +199,9 @@ export class ListPotentialDoctorComponent implements OnInit {
   save(){
     this.followupCreationComponent.followupCreateForm.ngSubmit.emit();
     this.closeModal();
+  }
+  saveFirstVisit(){
+    this.firstVisitCreateComponent.firstVisitForm.ngSubmit.emit();
+    this.closeFirstVisitModal()
   }
 }
