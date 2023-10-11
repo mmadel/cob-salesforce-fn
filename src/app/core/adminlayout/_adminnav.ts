@@ -24,10 +24,10 @@ export const adminNavItems: INavData[] = [
     children: [
       {
         name: 'Visited Doctors',
-        url: ''
+        url: 'target/visited'
       }, {
         name: 'First Visit Doctors',
-        url: ''
+        url: 'target/first'
       }
     ]
   },
