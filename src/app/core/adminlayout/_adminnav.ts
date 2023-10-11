@@ -31,4 +31,18 @@ export const adminNavItems: INavData[] = [
       }
     ]
   },
+  {
+    name: 'Follow Up',
+    url: '/administrator/followup',
+    iconComponent: { name: 'cilAppsSettings' }, 
+    children: [
+      {
+        name: 'Followup Doctors',
+        url: 'followup/list'
+      }, {
+        name: 'Followup Configurations',
+        url: 'followup/configure'
+      }
+    ]
+  }
 ];

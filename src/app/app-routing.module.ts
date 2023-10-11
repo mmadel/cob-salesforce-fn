@@ -23,6 +23,11 @@ const routes: Routes = [
           import('./modules/potential/potential.module').then((m) => m.PotentialModule)
       },
       {
+        path: 'followup',
+        loadChildren: () =>
+          import('./modules/followup/followup.module').then((m) => m.FollowupModule)
+      },
+      {
         path: 'target',
         loadChildren: () =>
           import('./modules/target/target.module').then((m) => m.TargetModule)
