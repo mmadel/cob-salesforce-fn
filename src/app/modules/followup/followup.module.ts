@@ -8,6 +8,8 @@ import  {
   ConfigureFollowupComponent,
   ListFollowupComponent
 } from './index'
+import { SmartPaginationModule, SmartTableModule } from '@coreui/angular-pro';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 const FOLLOWUP_COMPONENT=[
   ConfigureFollowupComponent,
@@ -19,7 +21,10 @@ const FOLLOWUP_COMPONENT=[
   imports: [
     CommonModule,
     FollowupRoutingModule,
-    SalesForceShareModule
+    SalesForceShareModule,
+    SmartTableModule,
+    SmartPaginationModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ],
 })
 export class FollowupModule { }
