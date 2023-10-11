@@ -9,7 +9,7 @@ export const adminNavItems: INavData[] = [
   {
     name: 'Potential',
     url: '/administrator/potential',
-    iconComponent: { name: 'cil-disabled' },
+    iconComponent: { name: 'cil-lineWeight' },
     children: [
       {
         name: 'Potential Doctors',
