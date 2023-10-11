@@ -85,6 +85,7 @@ export class ListTemplate {
                 columns.push({
                     key: element,
                     label: element.charAt(0).toUpperCase() + element.slice(1),
+                    _style: { width: '20%' },
                     filter: false,
                     sorter: false
                 })
