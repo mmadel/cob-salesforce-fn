@@ -61,6 +61,7 @@ export class FirstVisitCreateComponent implements OnInit {
     this.firstVisit.nextFollowupDate_str = moment(this.firstVisit.dateOfVisit_str).add(1, 'weeks').format("MM/DD/YYYY");
   }
   populateModel() {
+    this.firstVisit.doctor!.clinicId = "1"
     this.firstVisit.dateOfVisit = Number(moment(this.firstVisit.dateOfVisit_str).format("x"))
     this.firstVisit.nextFollowupDate = Number(moment(this.firstVisit.nextFollowupDate_str).format("x"))
     this.firstVisit.user = {
