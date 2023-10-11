@@ -25,7 +25,7 @@ const routes: Routes = [
       {
         path: 'target',
         loadChildren: () =>
-          import('./modules/target/target-routing.module').then((m) => m.TargetRoutingModule)
+          import('./modules/target/target.module').then((m) => m.TargetModule)
       }
     ]
   },
