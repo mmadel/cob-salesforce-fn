@@ -5,16 +5,18 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { SalesForceShareModule } from '../share/sales-force-share.module';
 import {
   ListPotentialDoctorComponent,
-  FollowupCreationComponent
+  FollowupCreationComponent,
+  FirstVisitCreateComponent
 } from './index';
 import { PotentialRoutingModule } from './potential-routing.module';
 
 const POTENTIAL_COMPONENT = [
   ListPotentialDoctorComponent,
-  FollowupCreationComponent
+  FollowupCreationComponent,
+  FirstVisitCreateComponent
 ]
 @NgModule({
-  declarations: [POTENTIAL_COMPONENT, FollowupCreationComponent],
+  declarations: [POTENTIAL_COMPONENT, FollowupCreationComponent, FirstVisitCreateComponent],
   imports: [
     CommonModule,
     PotentialRoutingModule,
