@@ -1,7 +1,14 @@
 <ngx-spinner></ngx-spinner>
 <c-row>
-  <c-col xs="12" class="mb-2">
+  <c-col xs="6" class="mb-2">
     <h1>Potential Doctors</h1>
+  </c-col>
+  <c-col xs="6">
+    <div style="float: right;" class="mb-3">
+      <button cButton color="primary" (click)="createFirstVisit()">
+        Create First Visit
+      </button>
+    </div>
   </c-col>
 </c-row>
 <hr />
@@ -43,6 +50,21 @@
   </c-modal-header>
   <c-modal-body>
     <app-followup-creation></app-followup-creation>
+  </c-modal-body>
+  <hr>
+  <div class="text-center mb-3">
+    <button cButton color="primary" (click)="save()">Save Follow Up</button>
+  </div>
+</c-modal>
+
+<c-modal id="firstVisit" #modalXl id="modalXl" size="xl" [visible]="firstVisible"
+  (visibleChange)="handleFirstVisitChange($event)">
+  <c-modal-header>
+    <h5 cModalTitle>First Visit</h5>
+    <button (click)="closeFirstVisitModal()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+    
   </c-modal-body>
   <hr>
   <div class="text-center mb-3">

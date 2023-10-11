@@ -29,6 +29,7 @@ export class ListPotentialDoctorComponent implements OnInit {
   @ViewChild(FollowupCreationComponent) followupCreationComponent: FollowupCreationComponent;
   constructor(private potentialService: PotentialService) { }
   public followupVisible = false;
+  public firstVisible = false;
   potentialDoctorData$!: Observable<[Doctor]>;
   readonly #destroy$ = new Subject<boolean>();
   readonly columns: (string | IColumn)[] = [
@@ -167,6 +168,9 @@ export class ListPotentialDoctorComponent implements OnInit {
     this.selectedDoctor = item.name +'-' +item.npi
     this.followupVisible = !this.followupVisible;
   }
+  createFirstVisit(){
+    this.firstVisible = !this.firstVisible;
+  }
   handleActivePageChange(page: number) {
     this.setActivePage(page);
   }
@@ -177,6 +181,12 @@ export class ListPotentialDoctorComponent implements OnInit {
   handleLiveDemoChange(event: any) {
     this.followupCreationComponent?.calculateDates();
     this.followupVisible = event;
+  }
+  handleFirstVisitChange(event: any){
+    this.firstVisible = event;
+  }
+  closeFirstVisitModal(){
+    this.firstVisible = !this.firstVisible;
   }
   closeModal(){
     this.followupCreationComponent.followupCreateForm.resetForm();
