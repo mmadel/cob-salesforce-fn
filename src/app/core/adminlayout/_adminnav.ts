@@ -44,5 +44,16 @@ export const adminNavItems: INavData[] = [
         url: 'followup/configure'
       }
     ]
+  },
+  {
+    name: 'Administration',
+    url:'/administrator/administration',
+    iconComponent: { name: 'cilChart' }, 
+    children:[
+      {
+        name: 'FirstTime Configuration',
+        url: 'administration/configure'
+      }
+    ]
   }
 ];
