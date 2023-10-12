@@ -137,7 +137,6 @@ export class ListPotentialDoctorComponent implements OnInit {
     this.potentialDoctorData$ = this.potentialService.getPotentialDoctors(this.apiParams$).pipe(
       retry({
         delay: (error) => {
-          console.warn('Retry: ', error);
           this.errorMessage$.next(error.message ?? `Error: ${JSON.stringify(error)}`);
           this.loadingData$.next(false);
           return this.retry$;
@@ -167,10 +166,10 @@ export class ListPotentialDoctorComponent implements OnInit {
   details_visible = Object.create({});
   startFollowup(item: Doctor) {
     this.followupCreationComponent.selectedpotentialDoctor = item;
-    this.selectedDoctor = item.name +'-' +item.npi
+    this.selectedDoctor = item.name + '-' + item.npi
     this.followupVisible = !this.followupVisible;
   }
-  createFirstVisit(){
+  createFirstVisit() {
     this.firstVisible = !this.firstVisible;
   }
   handleActivePageChange(page: number) {
@@ -184,24 +183,26 @@ export class ListPotentialDoctorComponent implements OnInit {
     this.followupCreationComponent?.calculateDates();
     this.followupVisible = event;
   }
-  handleFirstVisitChange(event: any){
+  handleFirstVisitChange(event: any) {
     this.firstVisitCreateComponent?.calculateDates();
     this.firstVisible = event;
   }
-  closeFirstVisitModal(){
+  closeFirstVisitModal() {
     this.firstVisible = !this.firstVisible;
   }
-  closeModal(){
+  closeModal() {
     this.followupCreationComponent.followupCreateForm.resetForm();
     this.followupCreationComponent.errorMessage = null;
     this.followupVisible = !this.followupVisible;
   }
-  save(){
+  save() {
     this.followupCreationComponent.followupCreateForm.ngSubmit.emit();
-    this.closeModal();
+    if (this.followupCreationComponent.followupCreateForm.valid)
+      this.closeModal();
   }
-  saveFirstVisit(){
+  saveFirstVisit() {
     this.firstVisitCreateComponent.firstVisitForm.ngSubmit.emit();
-    this.closeFirstVisitModal()
+    if (this.firstVisitCreateComponent.firstVisitForm.valid)
+      this.closeFirstVisitModal()
   }
 }
