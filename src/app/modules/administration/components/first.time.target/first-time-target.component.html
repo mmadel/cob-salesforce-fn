@@ -1,1 +1,40 @@
-<p>first-time-target works!</p>
+<c-container fluid>
+    <c-row class="justify-content-center">
+        <c-col class="col">
+            <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
+            <c-card>
+                <c-card-header>
+                    <h1>First Time Configuration</h1>
+                </c-card-header>
+                <c-card-body>
+                    <form cForm #firstTimeConfigForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
+                        <div class="form-group" class="mb-3">
+                            <small *ngIf="uuid.invalid && (uuid.dirty || uuid.touched)" class="form-text text-danger">
+                                User is required
+                              </small>
+                            <select cSelect sizing="sm" cFormControl name="impression" id="impression" required
+                                 [(ngModel)]="userUUID" #uuid="ngModel">
+                                <option value="">Select User</option>
+                                <option *ngFor="let user of users" [value]="user.uuid">
+                                    {{user.name}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group" class="mb-3">
+                            <small *ngIf="target.invalid && (target.dirty || target.touched)" class="form-text text-danger">
+                                target is required
+                              </small>
+                            <input cFormControl id="firstTimeTarget" name="firstTimeTarget" placeholder="first Time Target" required  type="number"
+                                [(ngModel)]="firstVisitTarget" #target="ngModel" />
+                        </div> 
+                    </form>
+                    <div class="text-center">
+                        <button cButton type="submit" size="sm" color="primary" variant="outline">
+                            Save
+                        </button>
+                    </div>
+                </c-card-body>
+            </c-card>
+        </c-col>
+    </c-row>
+</c-container>
