@@ -48,7 +48,7 @@ export class FollowupCreationComponent implements OnInit {
       this.followupCreationService.create(this.followup).subscribe((response) => {
         this.toastr.success('Follow-Up Created successfully');
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-          this.router.navigate(['administrator/potential/list']));
+          this.router.navigate(['administrator/followup/list']));
       },
         (error) => {
           this.toastr.error(error.error.message, 'Error while submit followup');
