@@ -1,1 +1,67 @@
-<p>followup-creation works!</p>
+<c-container fluid>
+    <c-row class="justify-content-center">
+      <c-col class="col">
+        <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
+        <form cForm #followupCreateForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
+          <div class="form-group" class="mb-3">
+            <label>Date of visit</label>
+            <c-date-picker closeOnSelect size="sm" cFormControl id="dateOfVisit" name="dateOfVisit"
+              placeholder="Date Of Visit"
+              [ngClass]="{'is-invalid': dateOfVisit.invalid && (dateOfVisit.dirty || dateOfVisit.touched)}"
+              [(ngModel)]="followup.dateOfVisit_str" #dateOfVisit="ngModel" disabled></c-date-picker>
+          </div>
+          <div class="form-group" class="mb-3">
+            <small *ngIf="impression.invalid && (impression.dirty || impression.touched)" class="form-text text-danger">
+              Impression is required
+            </small>
+            <select cSelect sizing="sm" cFormControl name="impression" id="impression" required
+              [(ngModel)]="followup.impression" #impression="ngModel">
+              <option value="">Select Impression</option>
+              <option *ngFor="let impression of impressions | keyvalue" [value]="impression.key">
+                {{impression.value}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group" class="mb-3">
+            <small *ngIf="contactName.invalid && (contactName.dirty || contactName.touched)"
+              class="form-text text-danger">
+              Contact Name is required
+            </small>
+            <c-input-group>
+              <input cFormControl id="contactName" name="contactName" placeholder="Contact Name" required
+                [(ngModel)]="followup.contactName" #contactName="ngModel" />
+            </c-input-group>
+          </div>
+          <div class="form-group" class="mb-3">
+            <small *ngIf="contactPosition.invalid && (contactPosition.dirty || contactPosition.touched)"
+              class="form-text text-danger">
+              Contact Postion is required
+            </small>
+            <select cSelect sizing="sm" cFormControl name="contactPosition" id="contactPosition" required
+              [(ngModel)]="followup.contactPosition" #contactPosition="ngModel">
+              <option value="">Select Position</option>
+              <option *ngFor="let position of contactPositions | keyvalue" [value]="position.key">
+                {{position.value}}
+              </option>
+            </select>
+          </div>
+          <div class="form-group" class="mb-3">
+            <label>Next follow-up date</label>
+            <c-date-picker closeOnSelect size="sm" cFormControl id="nextFollowupDate" name="nextFollowupDate"
+              placeholder="Follow Up Date" [(ngModel)]="followup.nextFollowupDate_str" #nextFollowupDate="ngModel"
+              disabled></c-date-picker>
+          </div>
+          <div class="form-group" class="mb-3">
+            <small *ngIf="feedback.invalid && (feedback.dirty || feedback.touched)" class="form-text text-danger">
+              feedback is required
+            </small>
+            <c-input-group>
+              <textarea cFormControl id="feedback" name="feedback" placeholder="feedback" required cols="200" class="mb-3"
+                [(ngModel)]="followup.feedback" #feedback="ngModel"></textarea>
+            </c-input-group>
+          </div>
+        </form>
+      </c-col>
+    </c-row>
+  
+  </c-container>

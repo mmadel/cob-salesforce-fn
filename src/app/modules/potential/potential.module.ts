@@ -26,6 +26,6 @@ const POTENTIAL_COMPONENT = [
     ModalModule,
     DatePickerModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
-  ]
+  ],
 })
 export class PotentialModule { }

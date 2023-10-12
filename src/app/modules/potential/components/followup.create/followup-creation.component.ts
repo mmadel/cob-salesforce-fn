@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { FollowUpType } from 'src/app/modules/followup/enum/followup.type';
 import { Followup } from 'src/app/modules/followup/models/followup.model';
 import { Doctor } from 'src/app/modules/share/model/doctor';
 import { ContactPosition } from '../../enums/contact.position';
@@ -46,7 +47,7 @@ export class FollowupCreationComponent implements OnInit {
       this.followupCreationService.create(this.followup).subscribe((response) => {
         this.toastr.success('Follow-Up Created successfully');
         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() =>
-          this.router.navigate(['administrator/potential/list']));
+          this.router.navigate(['administrator/followup/list']));
       },
         (error) => {
           this.toastr.error(error.error.message, 'Error while submit followup');
@@ -62,6 +63,7 @@ export class FollowupCreationComponent implements OnInit {
   }
 
   populateModel() {
+    this.followup.followUpType = FollowUpType.FIRST_FOLLOW_UP;
     this.followup.dateOfVisit = Number(moment(this.followup.dateOfVisit_str).format("x"))
     this.followup.nextFollowupDate = Number(moment(this.followup.nextFollowupDate_str).format("x"))
     this.followup.user = {

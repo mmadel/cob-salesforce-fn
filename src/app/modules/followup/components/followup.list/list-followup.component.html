@@ -58,7 +58,7 @@
     <button (click)="closeFollowupModal()" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>
-
+    <app-followup-creation [doctorUUID]="selectedDocotorUUID" [clinicId]="clinicId"></app-followup-creation>
   </c-modal-body>
   <hr>
   <div class="text-center mb-3">

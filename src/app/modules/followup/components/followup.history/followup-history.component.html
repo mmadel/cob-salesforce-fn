@@ -1,7 +1,7 @@
 <c-container fluid>
     <c-row class="justify-content-center">
         <c-col class="col">
-            <c-card *ngFor="let item of historyList" [cBorder]="'info'">
+            <c-card *ngFor="let item of historyList" [cBorder]="'info'" class="mb-3">
                 <c-card-body>
                     <strong>Date of visit:</strong> {{item.visitedDate  | date: 'MM/dd/yyyy'}} <br>
                     <strong>Imprestion:</strong> {{item.impression}} <br>

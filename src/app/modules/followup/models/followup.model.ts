@@ -1,5 +1,6 @@
 import { Doctor } from "../../share/model/doctor";
 import { User } from "../../share/model/user";
+import { FollowUpType } from "../enum/followup.type";
 
 export interface Followup {
     dateOfVisit?: number;
@@ -12,4 +13,5 @@ export interface Followup {
     feedback?: string;
     user?: User;
     doctor?: Doctor
+    followUpType?:FollowUpType
 }

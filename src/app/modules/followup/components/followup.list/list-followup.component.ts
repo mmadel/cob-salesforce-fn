@@ -4,6 +4,7 @@ import { map, Observable, retry, tap } from 'rxjs';
 import { Doctor } from 'src/app/modules/share/model/doctor';
 import { ListTemplate } from 'src/app/modules/share/template/list.template';
 import { FollowupDoctorService } from '../../services/followup-doctor.service';
+import { FollowupCreationComponent } from '../followup.creation/followup-creation.component';
 import { FollowupHistoryComponent } from '../followup.history/followup-history.component';
 
 @Component({
@@ -17,7 +18,9 @@ export class ListFollowupComponent extends ListTemplate implements OnInit {
   public historyVisible: boolean = false;
   public followupVisible: boolean = false;
   public selectedDocotorUUID:string;
+  public clinicId:string
   @ViewChild(FollowupHistoryComponent) followupHistoryComponent: FollowupHistoryComponent;
+  @ViewChild(FollowupCreationComponent) followupCreationComponent: FollowupCreationComponent;
   constructor(private followupDoctorService: FollowupDoctorService) {
     super();
   }
@@ -51,6 +54,7 @@ export class ListFollowupComponent extends ListTemplate implements OnInit {
     this.historyVisible = event;
   }
   handleFollowupChange(event: any) {
+    this.followupCreationComponent?.calculateDates();
     this.followupVisible = event;
   }
   closeHistoryModal() {
@@ -60,13 +64,17 @@ export class ListFollowupComponent extends ListTemplate implements OnInit {
     this.followupVisible = !this.followupVisible;
   }
   saveFollowup() {
+    this.followupCreationComponent.followupCreateForm.ngSubmit.emit();
+    if (this.followupCreationComponent.followupCreateForm.valid)
     this.closeFollowupModal();
   }
   openHistory(item: any) {
     this.historyVisible = !this.historyVisible;
     this.selectedDocotorUUID = item.uuid;
   }
-  openFollowup(item: Doctor) {
+  openFollowup(item: any) {
     this.followupVisible = !this.followupVisible;
+    this.selectedDocotorUUID = item.uuid;
+    this.clinicId = item.clinicId;
   }
 }
