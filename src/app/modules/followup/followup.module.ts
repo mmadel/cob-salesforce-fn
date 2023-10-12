@@ -3,20 +3,25 @@ import { CommonModule } from '@angular/common';
 
 import { FollowupRoutingModule } from './followup-routing.module';
 import { SalesForceShareModule } from '../share/sales-force-share.module';
-
-import  {
-  ConfigureFollowupComponent,
-  ListFollowupComponent
-} from './index'
 import { ModalModule, SmartPaginationModule, SmartTableModule } from '@coreui/angular-pro';
 import { NgxSpinnerModule } from 'ngx-spinner';
-
-const FOLLOWUP_COMPONENT=[
+import {
   ConfigureFollowupComponent,
-  ListFollowupComponent
+  ListFollowupComponent,
+  FollowupHistoryComponent,
+  FollowupCreationComponent
+} from './index'
+
+
+
+const FOLLOWUP_COMPONENT = [
+  ConfigureFollowupComponent,
+  ListFollowupComponent,
+  FollowupHistoryComponent,
+  FollowupCreationComponent
 ]
 @NgModule({
-  declarations: [FOLLOWUP_COMPONENT
+  declarations: [FOLLOWUP_COMPONENT, FollowupHistoryComponent, FollowupCreationComponent
   ],
   imports: [
     CommonModule,
