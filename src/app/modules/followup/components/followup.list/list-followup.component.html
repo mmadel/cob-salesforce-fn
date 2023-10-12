@@ -20,10 +20,10 @@
           </ng-container>
           <ng-container *ngSwitchCase="'actions'" class="py-2">
             <div class="btn-group" role="group" aria-label="Basic example">
-              <button cButton color="primary" size="sm" variant="outline">
+              <button cButton color="primary" size="sm" variant="outline" (click)="openFollowup(item)">
                 Start Follow-Up
               </button>
-              <button cButton color="primary" size="sm" variant="outline">
+              <button cButton color="primary" size="sm" variant="outline" (click)="openHistory(item)">
                 Show history
               </button>
             </div>
@@ -39,3 +39,30 @@
   <hr>
   <c-alert>{{errorMessage}}</c-alert>
 </ng-container>
+
+<c-modal id="history" #modalXl id="modalXl" size="xl" [visible]="historyVisible"
+  (visibleChange)="handleHistoryChange($event)">
+  <c-modal-header>
+    <h5 cModalTitle>History</h5>
+    <button (click)="closeHistoryModal()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+
+  </c-modal-body>
+  <hr>
+</c-modal>
+
+<c-modal id="Follow-Up" #modalXl id="modalXl" size="xl" [visible]="followupVisible"
+  (visibleChange)="handleFollowupChange($event)">
+  <c-modal-header>
+    <h5 cModalTitle>Start Follow-up</h5>
+    <button (click)="closeFollowupModal()" cButtonClose></button>
+  </c-modal-header>
+  <c-modal-body>
+
+  </c-modal-body>
+  <hr>
+  <div class="text-center mb-3">
+    <button cButton color="primary" (click)="saveFollowup()">Save Follow Up</button>
+  </div>
+</c-modal>

@@ -8,7 +8,7 @@ import  {
   ConfigureFollowupComponent,
   ListFollowupComponent
 } from './index'
-import { SmartPaginationModule, SmartTableModule } from '@coreui/angular-pro';
+import { ModalModule, SmartPaginationModule, SmartTableModule } from '@coreui/angular-pro';
 import { NgxSpinnerModule } from 'ngx-spinner';
 
 const FOLLOWUP_COMPONENT=[
@@ -24,6 +24,7 @@ const FOLLOWUP_COMPONENT=[
     SalesForceShareModule,
     SmartTableModule,
     SmartPaginationModule,
+    ModalModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ],
 })

@@ -13,12 +13,14 @@ import { FollowupDoctorService } from '../../services/followup-doctor.service';
 export class ListFollowupComponent extends ListTemplate implements OnInit {
   columns: (string | IColumn)[];
   potentialDoctorData$!: Observable<[Doctor]>;
-  constructor(private followupDoctorService:FollowupDoctorService) {
+  historyVisible: boolean;
+  followupVisible: boolean;
+  constructor(private followupDoctorService: FollowupDoctorService) {
     super();
-   }
+  }
 
   ngOnInit(): void {
-    this.columns = this.constructColumns(['name','npi', 'actions']);
+    this.columns = this.constructColumns(['name', 'npi', 'actions']);
     this.initListComponent();
     this.potentialDoctorData$ = this.followupDoctorService.getPotentialDoctors(this.apiParams$).pipe(
       retry({
@@ -42,5 +44,25 @@ export class ListFollowupComponent extends ListTemplate implements OnInit {
       })
     );
   }
-
+  handleHistoryChange(event: any) {
+    this.historyVisible = event;
+  }
+  handleFollowupChange(event: any) {
+    this.followupVisible = event;
+  }
+  closeHistoryModal() {
+    this.historyVisible = !this.historyVisible;
+  }
+  closeFollowupModal() {
+    this.followupVisible = !this.followupVisible;
+  }
+  saveFollowup() {
+    this.closeFollowupModal();
+  }
+  openHistory(item: Doctor) {
+    this.historyVisible = !this.historyVisible;
+  }
+  openFollowup(item: Doctor) {
+    this.followupVisible = !this.followupVisible;
+  }
 }
