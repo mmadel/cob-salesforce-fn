@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { merge } from 'rxjs';
+import { DashboardCounters } from '../models/dashboar.counters';
+import { DashboardService } from '../services/dashboard.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -7,9 +10,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  dashboardCounters: DashboardCounters;
+  constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
+    this.dashboardService.getDashboardCounters("1")
+    .subscribe((response)=>{
+      this.dashboardCounters = response;
+    })
   }
 
 }
