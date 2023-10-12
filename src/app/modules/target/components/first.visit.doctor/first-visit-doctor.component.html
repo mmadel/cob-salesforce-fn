@@ -10,7 +10,6 @@
             <th scope="col">#</th>
             <th scope="col">Doctor Name</th>
             <th scope="col">Doctor NPI</th>
-            <th scope="col">User Name</th>
             <th scope="col">Next Followup Date</th>
         </tr>
     </thead>
@@ -19,7 +18,6 @@
             <th scope="row">{{i+1}}</th>
             <td>{{task.doctorName}}</td>
             <td>{{task.doctorNPI}}</td>
-            <td>{{task.userName}}</td>
             <td>{{task.nextFollowupDate | date: 'MM/dd/yyyy'}}</td>
 
         </tr>

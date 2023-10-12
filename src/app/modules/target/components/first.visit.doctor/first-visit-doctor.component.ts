@@ -16,7 +16,6 @@ export class FirstVisitDoctorComponent implements OnInit {
   ngOnInit(): void {
     this.completeTaskService.getCompletedFirstVisitTask(this.clinicId)
       .subscribe((response) => {
-        console.log(response)
         this.tasks = response;
       }, (error) => {
         console.log(JSON.stringify(error))

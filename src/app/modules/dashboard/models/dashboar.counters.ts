@@ -1,4 +1,5 @@
 export interface DashboardCounters{
-    potentialDoctorsCounter?:string,
-    followupDoctorsCounter?:string,
+    potentialDoctorsCounter?:number,
+    followupDoctorsCounter?:number
+    userAchievement:number;
 }

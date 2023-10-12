@@ -11,8 +11,8 @@ export class DashboardService {
   private baseUrl = environment.baseURL + 'counter'
   constructor(private httpClient: HttpClient) { }
 
-  getDashboardCounters(clinicId: string) {
-    const dashboardCountersURL = this.baseUrl + '/dashboard/clinicId/' + 1
+  getDashboardCounters(clinicId: string, userUUID: string) {
+    const dashboardCountersURL = this.baseUrl + '/dashboard/clinicId/' + clinicId +'/user/' + userUUID
     return this.httpClient.get(dashboardCountersURL).pipe(
       map((response: any) => <DashboardCounters>response));
   }
