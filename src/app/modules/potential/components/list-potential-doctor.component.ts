@@ -104,7 +104,6 @@ export class ListPotentialDoctorComponent implements OnInit {
     this.apiParams$.next({ ...apiParams });
   }
   ngOnInit(): void {
-    console.log('################')
     this.activePage$.pipe(
       takeUntil(this.#destroy$)
     ).subscribe((page) => {

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { IColumn } from '@coreui/angular-pro/lib/smart-table/smart-table.type';
 import { map, Observable, retry, tap } from 'rxjs';
 import { Doctor } from 'src/app/modules/share/model/doctor';
 import { ListTemplate } from 'src/app/modules/share/template/list.template';
 import { FollowupDoctorService } from '../../services/followup-doctor.service';
+import { FollowupHistoryComponent } from '../followup.history/followup-history.component';
 
 @Component({
   selector: 'app-list-followup',
@@ -13,8 +14,10 @@ import { FollowupDoctorService } from '../../services/followup-doctor.service';
 export class ListFollowupComponent extends ListTemplate implements OnInit {
   columns: (string | IColumn)[];
   potentialDoctorData$!: Observable<[Doctor]>;
-  historyVisible: boolean;
-  followupVisible: boolean;
+  public historyVisible: boolean = false;
+  public followupVisible: boolean = false;
+  public selectedDocotorUUID:string;
+  @ViewChild(FollowupHistoryComponent) followupHistoryComponent: FollowupHistoryComponent;
   constructor(private followupDoctorService: FollowupDoctorService) {
     super();
   }
@@ -59,8 +62,9 @@ export class ListFollowupComponent extends ListTemplate implements OnInit {
   saveFollowup() {
     this.closeFollowupModal();
   }
-  openHistory(item: Doctor) {
+  openHistory(item: any) {
     this.historyVisible = !this.historyVisible;
+    this.selectedDocotorUUID = item.uuid;
   }
   openFollowup(item: Doctor) {
     this.followupVisible = !this.followupVisible;

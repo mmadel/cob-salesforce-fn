@@ -40,19 +40,18 @@
   <c-alert>{{errorMessage}}</c-alert>
 </ng-container>
 
-<c-modal id="history" #modalXl id="modalXl" size="xl" [visible]="historyVisible"
+<c-modal id="history" #modalXl id="historyID" size="lg" [visible]="historyVisible"
   (visibleChange)="handleHistoryChange($event)">
   <c-modal-header>
     <h5 cModalTitle>History</h5>
     <button (click)="closeHistoryModal()" cButtonClose></button>
   </c-modal-header>
   <c-modal-body>
-
+    <app-followup-history *ngIf="historyVisible" [doctorUUID]="selectedDocotorUUID"></app-followup-history>
   </c-modal-body>
-  <hr>
 </c-modal>
 
-<c-modal id="Follow-Up" #modalXl id="modalXl" size="xl" [visible]="followupVisible"
+<c-modal id="Follow-Up" #modalXl id="followupID" size="xl" [visible]="followupVisible"
   (visibleChange)="handleFollowupChange($event)">
   <c-modal-header>
     <h5 cModalTitle>Start Follow-up</h5>
