@@ -1,15 +1,15 @@
 <c-container fluid>
     <c-row class="justify-content-center">
         <c-col class="col">
-            <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
             <c-card>
                 <c-card-header>
                     <h1>First Time Configuration</h1>
                 </c-card-header>
                 <c-card-body>
+                    <p class="text-danger" *ngIf="errorMessage">{{ errorMessage }}</p>
                     <form cForm #firstTimeConfigForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
                         <div class="form-group" class="mb-3">
-                            <small *ngIf="uuid.invalid && (uuid.dirty || uuid.touched)" class="form-text text-danger">
+                            <small *ngIf="submitted  && (uuid.errors) || (uuid.invalid && (uuid.dirty || uuid.touched))" class="form-text text-danger">
                                 User is required
                               </small>
                             <select cSelect sizing="sm" cFormControl name="impression" id="impression" required
@@ -21,18 +21,18 @@
                             </select>
                         </div>
                         <div class="form-group" class="mb-3">
-                            <small *ngIf="target.invalid && (target.dirty || target.touched)" class="form-text text-danger">
+                            <small *ngIf="submitted  && (uuid.errors) ||(target.invalid && (target.dirty || target.touched))" class="form-text text-danger">
                                 target is required
                               </small>
                             <input cFormControl id="firstTimeTarget" name="firstTimeTarget" placeholder="first Time Target" required  type="number"
                                 [(ngModel)]="firstVisitTarget" #target="ngModel" />
                         </div> 
+                        <div class="text-center">
+                            <button cButton type="submit" size="sm" color="primary" variant="outline">
+                                Save
+                            </button>
+                        </div>
                     </form>
-                    <div class="text-center">
-                        <button cButton type="submit" size="sm" color="primary" variant="outline">
-                            Save
-                        </button>
-                    </div>
                 </c-card-body>
             </c-card>
         </c-col>

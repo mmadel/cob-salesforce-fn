@@ -6,6 +6,7 @@ import { SalesForceShareModule } from '../share/sales-force-share.module';
 import {
 FirstTimeTargetComponent
 } from './index'
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 @NgModule({
   declarations: [
@@ -15,6 +16,7 @@ FirstTimeTargetComponent
     CommonModule,
     AdministrationRoutingModule,
     SalesForceShareModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })
 export class AdministrationModule { }
