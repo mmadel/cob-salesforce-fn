@@ -19,7 +19,7 @@
         </c-widget-stat-b>
     </c-col>
     <c-col md="12" xl="3">
-        <c-widget-stat-b [title]="'First Time'" [value]="'10'" class="mb-4" [color]="'primary'">
+        <c-widget-stat-b [title]="'First Time'" *ngIf="userFirstTimeVisitTarget" [value]="'/'+userFirstTimeVisitTarget" class="mb-4" [color]="'primary'">
         </c-widget-stat-b>
     </c-col>
 </c-row>

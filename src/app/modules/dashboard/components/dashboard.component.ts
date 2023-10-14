@@ -11,18 +11,20 @@ import { DashboardService } from '../services/dashboard.service';
 export class DashboardComponent implements OnInit {
 
   dashboardCounters: DashboardCounters;
-  potentialDoctorsCounter:string
-  followupDoctorsCounter:string
-  userAchievement:string;
+  potentialDoctorsCounter: string
+  followupDoctorsCounter: string
+  userAchievement: string;
+  userFirstTimeVisitTarget: string
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
-    this.dashboardService.getDashboardCounters("1","e066f671-c714-40da-af03-b9c3252eb252")
-    .subscribe((response)=>{
-      this.potentialDoctorsCounter = response.potentialDoctorsCounter +''
-      this.followupDoctorsCounter = response.followupDoctorsCounter +''
-      this.userAchievement = response.userAchievement +''
-    })
+    this.dashboardService.getDashboardCounters("1", "e066f671-c714-40da-af03-b9c3252eb252")
+      .subscribe((response) => {
+        this.potentialDoctorsCounter = response.potentialDoctorsCounter + ''
+        this.followupDoctorsCounter = response.followupDoctorsCounter + ''
+        this.userAchievement = response.userAchievement + ''
+        this.userFirstTimeVisitTarget = response.userFirstTimeVisitTarget + ''
+      })
   }
 
 }
