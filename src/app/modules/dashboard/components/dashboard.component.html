@@ -1,25 +1,28 @@
 <c-row>
     <c-col md="12" xl="3">
         <a routerLink="/administrator/potential/list" style="text-decoration:none;">
-            <c-widget-stat-b [title]="'Potential Doctors'"  *ngIf="potentialDoctorsCounter" [value]="potentialDoctorsCounter"
-                class="mb-4" [color]="'danger'" ng-href="administrator/potential/list">
+            <c-widget-stat-b [title]="'Potential Doctors'" *ngIf="potentialDoctorsCounter"
+                [value]="potentialDoctorsCounter" class="mb-4" [color]="'danger'"
+                ng-href="administrator/potential/list">
             </c-widget-stat-b>
         </a>
-        
+
     </c-col>
     <c-col md="12" xl="3">
         <a routerLink="/administrator/followup/list" style="text-decoration:none;">
-            <c-widget-stat-b [title]="'Follow Up Doctors'" *ngIf="followupDoctorsCounter" [value]="followupDoctorsCounter"
-                class="mb-4" [color]="'warning'" ng-href="administrator/followup/list">
+            <c-widget-stat-b [title]="'Follow Up Doctors'" *ngIf="followupDoctorsCounter"
+                [value]="followupDoctorsCounter" class="mb-4" [color]="'warning'" ng-href="administrator/followup/list">
             </c-widget-stat-b>
         </a>
     </c-col>
     <c-col md="12" xl="3">
-        <c-widget-stat-b [title]="'Achievement'" *ngIf="userAchievement" [value]="userAchievement" class="mb-4" [color]="'success'">
+        <c-widget-stat-b [title]="'Achievement'" *ngIf="userAchievement" [value]="userAchievement" class="mb-4"
+            [color]="'success'">
         </c-widget-stat-b>
     </c-col>
     <c-col md="12" xl="3">
-        <c-widget-stat-b [title]="'First Time'" *ngIf="userFirstTimeVisitTarget" [value]="'/'+userFirstTimeVisitTarget" class="mb-4" [color]="'primary'">
+        <c-widget-stat-b [title]="'First Time'" *ngIf="userFirstTimeVisitTarget"
+            [value]="this.userFirstTimeVisitAchievement+'/'+userFirstTimeVisitTarget" class="mb-4" [color]="'primary'">
         </c-widget-stat-b>
     </c-col>
 </c-row>

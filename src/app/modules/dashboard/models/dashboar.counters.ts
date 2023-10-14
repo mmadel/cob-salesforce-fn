@@ -3,4 +3,5 @@ export interface DashboardCounters{
     followupDoctorsCounter?:number
     userAchievement:number;
     userFirstTimeVisitTarget:number;
+    userFirstTimeVisitAchievement:number;
 }

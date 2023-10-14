@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   followupDoctorsCounter: string
   userAchievement: string;
   userFirstTimeVisitTarget: string
+  userFirstTimeVisitAchievement:string;
   constructor(private dashboardService: DashboardService) { }
 
   ngOnInit(): void {
@@ -24,6 +25,7 @@ export class DashboardComponent implements OnInit {
         this.followupDoctorsCounter = response.followupDoctorsCounter + ''
         this.userAchievement = response.userAchievement + ''
         this.userFirstTimeVisitTarget = response.userFirstTimeVisitTarget + ''
+        this.userFirstTimeVisitAchievement = response.userFirstTimeVisitAchievement + ''
       })
   }
 
