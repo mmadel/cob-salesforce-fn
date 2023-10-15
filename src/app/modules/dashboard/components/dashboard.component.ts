@@ -57,7 +57,7 @@ export class DashboardComponent implements OnInit {
         if (this.clinicId === payload[0])
           this.followupDoctorsCounter = payload[1];
       });
-      this.ws.subscribe("/topic/firstvisit", (message: any) => {
+      this.ws.subscribe("/topic/first/visit/target", (message: any) => {
         var payload = message.body.split("_");
         if (this.userUUId === payload[0])
           this.userFirstTimeVisitTarget = payload[1];
