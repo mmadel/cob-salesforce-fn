@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClassToggleService, HeaderComponent } from '@coreui/angular-pro';
+import { KcAuthService } from 'src/app/modules/security/service/kc/kc-auth.service';
 
 @Component({
   selector: 'app-admin-header',
@@ -28,7 +29,8 @@ export class AdminHeaderComponent extends HeaderComponent {
     themeSwitchRadio: new UntypedFormControl('light'),
   });
 
-  constructor(private _classToggler: ClassToggleService, private router: Router) {
+  constructor(private _classToggler: ClassToggleService, private router: Router
+    , private ksAuthServiceService: KcAuthService) {
     super();
   }
   ngOnInit(): void {
@@ -40,7 +42,7 @@ export class AdminHeaderComponent extends HeaderComponent {
     this.classToggler.toggle('body', 'dark-theme');
   }
   logout() {
-
+    this.ksAuthServiceService.logout()
   }
   setSelectedClinic(event: any) {
 

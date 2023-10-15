@@ -1,3 +1,5 @@
+import { LocationStrategy, PathLocationStrategy } from '@angular/common';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,7 +13,10 @@ import {
   DefaultHeaderComponent, 
   DefaultLayoutComponent
 } from './core';
+import { SecurityModule } from './modules/security/security.module';
+import { AuthInterceptor } from './modules/security/service/auth.interceptor';
 import { SalesForceShareModule } from './modules/share/sales-force-share.module';
+
 const APP_CONTAINERS = [
   DefaultHeaderComponent,
   DefaultFooterComponent,
@@ -28,6 +33,7 @@ const ADMIN_APP_CONTAINERS = [
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,SalesForceShareModule,
+    SecurityModule,
     ToastrModule.forRoot({
       timeOut: 9000,
       closeButton: true,
@@ -35,7 +41,13 @@ const ADMIN_APP_CONTAINERS = [
       progressAnimation:'decreasing'
     }),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: PathLocationStrategy,
+    },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
