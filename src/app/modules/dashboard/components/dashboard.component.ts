@@ -62,6 +62,11 @@ export class DashboardComponent implements OnInit {
         if (this.userUUId === payload[0])
           this.userFirstTimeVisitTarget = payload[1];
       });
+      this.ws.subscribe("/topic/first/visit/achieved", (message: any) => {
+        var payload = message.body.split("_");
+        if (this.userUUId === payload[0])
+          this.userFirstTimeVisitAchievement = payload[1];
+      });
       this.disabled = true;
     }, (error: any) => {
       console.log("STOMP error " + error);
