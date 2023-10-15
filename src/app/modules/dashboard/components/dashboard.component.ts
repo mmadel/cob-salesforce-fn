@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SecurityContext } from '@angular/core';
 import { merge } from 'rxjs';
 import { DashboardCounters } from '../models/dashboar.counters';
 import { DashboardService } from '../services/dashboard.service';
 import * as Stomp from 'stompjs';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-dashboard',
@@ -17,13 +18,13 @@ export class DashboardComponent implements OnInit {
   userAchievement: string;
   userFirstTimeVisitTarget: string
   userFirstTimeVisitAchievement: string;
-
   showConversation: boolean = false;
   ws: any;
   name: string;
   disabled: boolean;
   clinicId: string = '1';
-  constructor(private dashboardService: DashboardService) { }
+  userUUId:string = 'e066f671-c714-40da-af03-b9c3252eb252';
+  constructor(private dashboardService: DashboardService , private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     this.dashboardService.getDashboardCounters("1", "e066f671-c714-40da-af03-b9c3252eb252")
@@ -32,9 +33,12 @@ export class DashboardComponent implements OnInit {
         this.followupDoctorsCounter = response.followupDoctorsCounter + ''
         this.userAchievement = response.userAchievement + ''
         this.userFirstTimeVisitTarget = response.userFirstTimeVisitTarget + ''
-        this.userFirstTimeVisitAchievement = response.userFirstTimeVisitAchievement + ''
+        this.userFirstTimeVisitAchievement = response.userFirstTimeVisitAchievement + '' 
       })
     this.connect();
+  }
+  getFirstVisitTargetAsHTML(){
+    return  this.sanitizer.bypassSecurityTrustHtml(`<b style="font-family:Lucida">Target is </b> <strong>${this.userFirstTimeVisitTarget}</strong>`);
   }
   connect() {
     let socket = new WebSocket("ws://localhost:8080/salesforce-service/api/counters");
@@ -42,7 +46,7 @@ export class DashboardComponent implements OnInit {
 
     this.ws.connect({}, (frame: any) => {
       this.ws.subscribe("/errors", (message: any) => {
-        alert("Error " + message.body);
+        console.log("Error " + message.body);
       });
       this.ws.subscribe("/topic/potential", (message: any) => {
         this.potentialDoctorsCounter = message.body;
@@ -50,13 +54,17 @@ export class DashboardComponent implements OnInit {
       });
       this.ws.subscribe("/topic/followup", (message: any) => {
         var payload = message.body.split("_");
-        console.log(payload[0] +' ' + payload[1])
         if (this.clinicId === payload[0])
           this.followupDoctorsCounter = payload[1];
       });
+      this.ws.subscribe("/topic/firstvisit", (message: any) => {
+        var payload = message.body.split("_");
+        if (this.userUUId === payload[0])
+          this.userFirstTimeVisitTarget = payload[1];
+      });
       this.disabled = true;
     }, (error: any) => {
-      alert("STOMP error " + error);
+      console.log("STOMP error " + error);
     });
   }
   disconnect() {
