@@ -3,8 +3,8 @@ import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClassToggleService, HeaderComponent } from '@coreui/angular-pro';
 import { Clinic } from 'src/app/modules/administration/model/clinic';
+import { ClinicService } from 'src/app/modules/administration/services/clinic/clinic.service';
 import { KcAuthService } from 'src/app/modules/security/service/kc/kc-auth.service';
-import { ClinicService } from 'src/app/modules/share/services/clinic.service';
 
 @Component({
   selector: 'app-admin-header',
