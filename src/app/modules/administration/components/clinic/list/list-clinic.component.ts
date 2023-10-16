@@ -23,6 +23,6 @@ export class ListClinicComponent implements OnInit {
     )
   }
   create(){
-    
+    this.router.navigate(['/administrator/administration/create/clinic'])
   }
 }
