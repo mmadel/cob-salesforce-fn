@@ -6,7 +6,9 @@ import { SalesForceShareModule } from '../share/sales-force-share.module';
 import {
 FirstTimeTargetComponent,
 CreateClinicComponent,
-ListClinicComponent
+ListClinicComponent,
+CreateUserComponent,
+ListUserComponent
 } from './index'
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { TableModule } from '@coreui/angular-pro';
@@ -17,6 +19,8 @@ import { TableModule } from '@coreui/angular-pro';
     FirstTimeTargetComponent,
     CreateClinicComponent,
     ListClinicComponent,
+    CreateUserComponent,
+    ListUserComponent,
   ],
   imports: [
     CommonModule,
