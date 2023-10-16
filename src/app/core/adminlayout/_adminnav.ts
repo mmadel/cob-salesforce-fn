@@ -53,6 +53,10 @@ export const adminNavItems: INavData[] = [
       {
         name: 'FirstTime Configuration',
         url: 'administration/configure'
+      },
+      {
+        name: 'Clinic List',
+        url: 'administration/list/clinic'
       }
     ]
   }

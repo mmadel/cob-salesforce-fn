@@ -4,13 +4,18 @@ import { CommonModule } from '@angular/common';
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { SalesForceShareModule } from '../share/sales-force-share.module';
 import {
-FirstTimeTargetComponent
+FirstTimeTargetComponent,
+CreateClinicComponent,
+ListClinicComponent
 } from './index'
 import { NgxSpinnerModule } from 'ngx-spinner';
 
+
 @NgModule({
   declarations: [
-    FirstTimeTargetComponent
+    FirstTimeTargetComponent,
+    CreateClinicComponent,
+    ListClinicComponent
   ],
   imports: [
     CommonModule,
