@@ -22,4 +22,9 @@ export class UserService {
     return this.httpClient.get(url).pipe(
       map((response: any) => <User[]>response));
   }
+  create(user: User){
+    const url = this.baseUrl + '/create'
+    const headers = { 'content-type': 'application/json' }
+    return this.httpClient.post(`${url}`, JSON.stringify(user), { 'headers': headers, observe: 'response' })
+  }
 }

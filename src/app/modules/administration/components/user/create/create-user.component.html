@@ -55,7 +55,7 @@
 
                                 <c-multi-select *ngIf="clinics" multiple cSelect sizing="sm"
                                     autoComplete="selectedClinics" name="selectedClinics" id="selectedClinics"
-                                    [(ngModel)]="user.clinics" #userclinics="ngModel">
+                                    [(ngModel)]="selectedClinicIds" #userclinics="ngModel">
                                     <c-multi-select-option *ngFor="let clinic of clinics"
                                         [value]="clinic.id?.toString()"
                                         [selected]="clinic.selected">{{clinic.name}}</c-multi-select-option>

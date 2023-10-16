@@ -1,8 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
+import { LocalService } from 'src/app/modules/share/services/local.service';
 import { Clinic } from '../../../model/clinic';
 import { User } from '../../../model/user';
 import { ClinicService } from '../../../services/clinic/clinic.service';
+import { UserService } from '../../../services/user.service';
 interface UserRole {
   name: string;
   value: string
@@ -24,8 +28,13 @@ export class CreateUserComponent implements OnInit {
     userRole: ''
   }
   clinics: Clinic[];
+  selectedClinicIds: number[];
   @ViewChild('createUserForm') createUserForm: NgForm;
-  constructor(private clinicService: ClinicService) { }
+  constructor(private clinicService: ClinicService
+    , private localService: LocalService
+    , private userService: UserService
+    , private router: Router
+    , private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.clinicService.list().subscribe(response => {
@@ -38,12 +47,27 @@ export class CreateUserComponent implements OnInit {
   }
 
   create(event: any) {
+    this.user.password = this.localService.encrypt(this.user.password !== undefined ? this.user.password : '')
     this.submitted = true;
+    var selectedClinicIds: Clinic[] = new Array();
+    this.selectedClinicIds.forEach(selectedId => {
+      var clinic: Clinic = {
+        id: Number(selectedId)
+      };
+      selectedClinicIds.push(clinic);
+    })
+    this.user.clinics = selectedClinicIds;
     if (this.createUserForm.valid) {
-      this.submitted = false;
+      this.userService.create(this.user).subscribe((response) => {
+        this.toastr.success('Clinic created successfully');
+        this.submitted = false;
+        this.createUserForm.reset();
+        this.router.navigate(['/administrator/administration/list/user'])
+      })
     }
   }
   resetError() {
-
+    this.submitted = false;
   }
+
 }
