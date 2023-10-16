@@ -42,17 +42,4 @@ export class AuthInterceptor implements HttpInterceptor {
           return [];
         }))
   }
-
-  private isRefreshURLS(url: string): boolean {
-    var isRefreshURL: boolean = false;
-    var urls: string[] = ['intake', 'patient/create', 'agreement', 'insurance/company/find', 'patient/upload', 'patient/signature/upload'];
-    for (let element of urls) {
-      if (url.includes(element)) {
-        isRefreshURL = true;
-        break;
-      }
-    }
-    console.log(isRefreshURL)
-    return isRefreshURL;
-  }
 }
