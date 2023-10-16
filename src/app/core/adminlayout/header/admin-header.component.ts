@@ -1,8 +1,10 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClassToggleService, HeaderComponent } from '@coreui/angular-pro';
+import { Clinic } from 'src/app/modules/administration/model/clinic';
 import { KcAuthService } from 'src/app/modules/security/service/kc/kc-auth.service';
+import { ClinicService } from 'src/app/modules/share/services/clinic.service';
 
 @Component({
   selector: 'app-admin-header',
@@ -12,8 +14,10 @@ import { KcAuthService } from 'src/app/modules/security/service/kc/kc-auth.servi
 
 
 export class AdminHeaderComponent extends HeaderComponent {
-
+  clinics: Clinic[] = new Array();
+  selectedClinicId: number;
   userName: string | undefined;
+  @ViewChild('userClinics') userClinics: ElementRef;
   public get classToggler(): ClassToggleService {
     return this._classToggler;
   }
@@ -30,11 +34,19 @@ export class AdminHeaderComponent extends HeaderComponent {
   });
 
   constructor(private _classToggler: ClassToggleService, private router: Router
-    , private ksAuthServiceService: KcAuthService) {
+    , private ksAuthServiceService: KcAuthService
+    , private clinicService: ClinicService) {
     super();
   }
   ngOnInit(): void {
-
+    this.ksAuthServiceService.loadUserProfile()
+    .then((userProfile) => {
+      this.userName = userProfile.username?.charAt(0).toUpperCase()
+      this.clinicService.getByUserId(userProfile.id).subscribe(response => {
+        this.clinics = response;
+        this.clinicService.selectedClinic$.next(this.clinics[0].id!)
+      })
+    })
   }
 
   setTheme(value: string): void {

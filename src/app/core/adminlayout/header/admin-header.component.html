@@ -4,11 +4,16 @@
     <button toggle="visible" cHeaderToggler [cSidebarToggle]="sidebarId" class="ps-1">
       <svg cIcon name="cilMenu" size="lg"></svg>
     </button>
-    <c-header-nav class="d-none d-lg-flex me-auto">
-      
+    <c-header-nav class="d-lg-flex me-auto">
+      <select *ngIf="clinics" #userClinics cSelect sizing="sm" style="line-height: 15px;"
+      (change)="setSelectedClinic($event)">
+      <option *ngFor="let clinic of clinics" [value]="clinic.id">
+        {{clinic.name}}
+      </option>
+    </select>
     </c-header-nav>
     <c-header-nav class="ms-auto me-4">
-      
+    
     </c-header-nav>
     <c-header-nav class="ms-auto me-4">
       <form [formGroup]="themeSwitch" cForm>
