@@ -6,6 +6,7 @@ import * as Stomp from 'stompjs';
 import { DomSanitizer } from '@angular/platform-browser';
 import { KcAuthService } from '../../security/service/kc/kc-auth.service';
 import { ClinicService } from '../../administration/services/clinic/clinic.service';
+import { CacheService } from '../../share/services/cahce/cache.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,13 +30,16 @@ export class DashboardComponent implements OnInit {
   constructor(private dashboardService: DashboardService,
     private sanitizer: DomSanitizer,
     private kcAuthService: KcAuthService,
-    private clinicService: ClinicService) { }
+    private clinicService: ClinicService,
+    private cacheService: CacheService) { }
 
   ngOnInit(): void {
     combineLatest([from(this.kcAuthService.loadUserProfile()), this.clinicService.selectedClinic$])
       .pipe(
         filter((result) => result[1] !== null),
-        tap((result) => {
+        tap((result) => 
+        {
+          this.cacheService.setLoggedinUserUUID(this.userUUId);
           this.userUUId = result[0].id!;
           this.clinicId = result[1] !== null ? result[1].toString() : ""
         }),
