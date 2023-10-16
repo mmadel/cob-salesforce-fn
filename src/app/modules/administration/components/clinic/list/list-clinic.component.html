@@ -1,0 +1,29 @@
+<ngx-spinner></ngx-spinner>
+<c-row>
+  <c-col xs="12">
+    <h1>Clinic List</h1>
+  </c-col>
+  <c-col xs="12">
+    <div style="float: right;">
+      <button cButton color="primary" variant="outline" (click)="create()">
+        Create Clinic
+      </button>
+    </div>
+  </c-col>
+</c-row>
+<hr />
+<table cTable>
+  <thead cTableColor="light">
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Clinic Name</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let clinic of clinics; index as i;">
+      <td>{{clinic.name}}</td>      
+      
+    </tr>
+
+  </tbody>
+</table>

@@ -9,18 +9,20 @@ CreateClinicComponent,
 ListClinicComponent
 } from './index'
 import { NgxSpinnerModule } from 'ngx-spinner';
+import { TableModule } from '@coreui/angular-pro';
 
 
 @NgModule({
   declarations: [
     FirstTimeTargetComponent,
     CreateClinicComponent,
-    ListClinicComponent
+    ListClinicComponent,
   ],
   imports: [
     CommonModule,
     AdministrationRoutingModule,
     SalesForceShareModule,
+    TableModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })
