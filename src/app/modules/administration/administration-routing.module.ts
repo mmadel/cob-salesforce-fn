@@ -22,7 +22,7 @@ const routes: Routes = [{
       path:'list/clinic',
       component: ListClinicComponent,
       data: {
-        title: 'List Clinic',
+        title: 'Clinic List',
       }
     },
     {
@@ -43,7 +43,7 @@ const routes: Routes = [{
       path:'list/user',
       component: ListUserComponent,
       data: {
-        title: 'List Clinic',
+        title: 'User List',
       }
     }
   ]

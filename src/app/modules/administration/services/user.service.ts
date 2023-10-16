@@ -16,4 +16,10 @@ export class UserService {
     return this.httpClient.get(url).pipe(
       map((response: any) => <User[]>response));
   }
+  
+  list(){
+    const url = this.baseUrl + '/find';
+    return this.httpClient.get(url).pipe(
+      map((response: any) => <User[]>response));
+  }
 }
