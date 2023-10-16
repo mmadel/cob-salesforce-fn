@@ -57,7 +57,7 @@ export class AdminHeaderComponent extends HeaderComponent {
     this.ksAuthServiceService.logout()
   }
   setSelectedClinic(event: any) {
-
+    this.clinicService.selectedClinic$.next(event.target.value)
   }
   startDateChange(event: any) {
 
