@@ -1,1 +1,76 @@
-<p>create-user works!</p>
+<ngx-spinner></ngx-spinner>
+<c-container fluid>
+    <c-row class="justify-content-center">
+        <c-col class="col">
+            <c-card class="mb-3 ustify-content-center">
+                <c-card-header>
+                    <h3>User Creation</h3>
+                </c-card-header>
+                <c-card-body>
+                    <form cForm #createUserForm="ngForm" (ngSubmit)="create($event)" (change)="resetError()">
+                        <div class="form-group">
+                            <small
+                                    *ngIf="submitted && (name.errors) || (name.invalid && (name.dirty || name.touched))"
+                                    class="form-text text-danger">
+                                    User is required
+                                </small>
+                            <c-input-group class="mb-3">
+                                <input autoComplete="name" cFormControl id="name" name="name"
+                                    placeholder="Enter User Name" required
+                                    [ngClass]="{'is-invalid': name.invalid && (name.dirty || name.touched)}"
+                                    [(ngModel)]="user.name" #name="ngModel" />
+                            </c-input-group>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <small
+                                    *ngIf="submitted && (password.errors) || (password.invalid && (password.dirty || password.touched))"
+                                    class="form-text text-danger">
+                                    Password is required
+                                </small>
+                                <c-input-group class="mb-3">
+                                    <input autoComplete="password" cFormControl id="password" name="password"
+                                        type="password" placeholder="Enter User Password" required
+                                        [ngClass]="{'is-invalid': password.invalid && (password.dirty || password.touched)}"
+                                        [(ngModel)]="user.password" #password="ngModel" />
+                                </c-input-group>
+                            </div>
+                        </div>
+                        <div class="form-group" class="mb-3">
+                            <small
+                                *ngIf="submitted && (userrole.errors) || (userrole.invalid && (userrole.dirty || userrole.touched))"
+                                class="form-text text-danger">
+                                Role is required
+                            </small>
+                            <select cSelect sizing="sm" name="userrole" id="userrole" required=""
+                                [(ngModel)]="user.userRole" #userrole="ngModel">
+                                <option value="">Select Role</option>
+                                <option *ngFor="let role of userRoles" [value]="role.value">
+                                    {{role.name}}
+                                </option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <c-input-group class="mb-3">
+
+                                <c-multi-select *ngIf="clinics" multiple cSelect sizing="sm"
+                                    autoComplete="selectedClinics" name="selectedClinics" id="selectedClinics"
+                                    [(ngModel)]="user.clinics" #userclinics="ngModel">
+                                    <c-multi-select-option *ngFor="let clinic of clinics"
+                                        [value]="clinic.id?.toString()"
+                                        [selected]="clinic.selected">{{clinic.name}}</c-multi-select-option>
+                                </c-multi-select>
+                            </c-input-group>
+                        </div>
+                        <div class="text-center">
+                            <button cButton type="submit" size="sm" color="primary" variant="outline">
+                                Create
+                            </button>
+                        </div>
+                    </form>
+                </c-card-body>
+
+            </c-card>
+        </c-col>
+    </c-row>
+</c-container>

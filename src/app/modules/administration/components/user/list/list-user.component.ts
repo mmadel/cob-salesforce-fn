@@ -27,6 +27,6 @@ export class ListUserComponent implements OnInit {
     return this.isLoggedIn;
   }
   create(){
-    
+    this.router.navigate(['/administrator/administration/create/user'])
   }
 }

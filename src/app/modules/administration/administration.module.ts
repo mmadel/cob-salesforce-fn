@@ -11,7 +11,7 @@ CreateUserComponent,
 ListUserComponent
 } from './index'
 import { NgxSpinnerModule } from 'ngx-spinner';
-import { TableModule } from '@coreui/angular-pro';
+import { MultiSelectModule, TableModule } from '@coreui/angular-pro';
 
 
 @NgModule({
@@ -27,6 +27,7 @@ import { TableModule } from '@coreui/angular-pro';
     AdministrationRoutingModule,
     SalesForceShareModule,
     TableModule,
+    MultiSelectModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })
