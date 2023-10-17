@@ -2,6 +2,7 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClassToggleService, HeaderComponent } from '@coreui/angular-pro';
+import { KeycloakService } from 'keycloak-angular';
 import { Clinic } from 'src/app/modules/administration/model/clinic';
 import { ClinicService } from 'src/app/modules/administration/services/clinic/clinic.service';
 import { KcAuthService } from 'src/app/modules/security/service/kc/kc-auth.service';
@@ -37,15 +38,30 @@ export class AdminHeaderComponent extends HeaderComponent {
   constructor(private _classToggler: ClassToggleService, private router: Router
     , private ksAuthServiceService: KcAuthService
     , private clinicService: ClinicService
-    , private cahceService: CacheService) {
+    , private keycloakService: KeycloakService
+    , private cacheService: CacheService) {
     super();
   }
   ngOnInit(): void {
-    this.userName = this.cahceService.getLoggedinUserName()?.charAt(0).toUpperCase()
-    this.clinicService.getByUserId(this.cahceService.getLoggedinUserUUID()).subscribe(response => {
-      this.clinics = response;
-      this.clinicService.selectedClinic$.next(this.clinics[0].id!)
-    })
+    this.keycloakService.isLoggedIn()
+      .then((loggedIn) => {
+        console.log('is LoggedIn ' + loggedIn)
+        if (loggedIn) {
+          this.keycloakService.loadUserProfile()
+            .then((userProfile) => {
+
+              console.log('uuid  ' + userProfile.id!)
+              console.log('username  ' + userProfile.username!)
+              this.cacheService.setLoggedinUserUUID(userProfile.id!)
+              this.cacheService.setLoggedinUserName(userProfile.username!);
+              this.userName = this.cacheService.getLoggedinUserName()?.charAt(0).toUpperCase()
+              this.clinicService.getByUserId(this.cacheService.getLoggedinUserUUID()).subscribe(response => {
+                this.clinics = response;
+                this.clinicService.selectedClinic$.next(this.clinics[0].id!)
+              })
+            })
+        }
+      })
   }
 
   setTheme(value: string): void {

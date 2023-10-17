@@ -19,8 +19,6 @@ export class AppComponent implements OnInit {
     private router: Router,
     private titleService: Title,
     private iconSetService: IconSetService,
-    private keycloakService: KeycloakService,
-    private cacheService: CacheService
   ) {
     titleService.setTitle(this.title);
     // iconSet singleton
@@ -28,13 +26,10 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    merge(from(this.keycloakService.isLoggedIn()))
-      .pipe(
-        filter(islogged => islogged),
-        switchMap(islogged => from(this.keycloakService.loadUserProfile())))
-      .subscribe((userProfile) => {
-        this.cacheService.setLoggedinUserUUID(userProfile.id!)
-        this.cacheService.setLoggedinUserName(userProfile.username!);
-      })
+      this.router.events.subscribe((evt) => {
+        if (!(evt instanceof NavigationEnd)) {
+          return;
+        }
+      });
   }
 }
