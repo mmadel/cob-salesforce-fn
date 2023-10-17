@@ -23,7 +23,7 @@ export const adminNavItems: INavData[] = [
     iconComponent: { name: 'cil-task' },
     children: [
       {
-        name: 'Potential Doctors',
+        name: 'Visited Doctors',
         url: 'target/visited'
       }, {
         name: 'First Visit Doctors',
@@ -55,11 +55,11 @@ export const adminNavItems: INavData[] = [
         url: 'administration/configure'
       },
       {
-        name: 'Clinic List',
+        name: 'Clinics',
         url: 'administration/list/clinic'
       },
       {
-        name: 'User List',
+        name: 'Users',
         url: 'administration/list/user'
       }
 
