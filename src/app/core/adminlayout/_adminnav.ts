@@ -34,25 +34,26 @@ export const adminNavItems: INavData[] = [
   {
     name: 'Follow Up',
     url: '/administrator/followup',
-    iconComponent: { name: 'cilAppsSettings' }, 
+    iconComponent: { name: 'cilAppsSettings' },
     children: [
       {
         name: 'Followup Doctors',
         url: 'followup/list'
-      }, {
-        name: 'Followup Configurations',
-        url: 'followup/configure'
       }
     ]
   },
   {
     name: 'Administration',
-    url:'/administrator/administration',
-    iconComponent: { name: 'cilChart' }, 
-    children:[
+    url: '/administrator/administration',
+    iconComponent: { name: 'cilChart' },
+    children: [
       {
         name: 'FirstTime Configuration',
         url: 'administration/configure'
+      },
+      {
+        name: 'Followup Configurations',
+        url: 'administration/config-followup/'
       },
       {
         name: 'Clinics',
@@ -61,7 +62,7 @@ export const adminNavItems: INavData[] = [
       {
         name: 'Users',
         url: 'administration/list/user'
-      }
+      },
 
     ]
   }

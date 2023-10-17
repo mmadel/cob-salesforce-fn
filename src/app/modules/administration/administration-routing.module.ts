@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateClinicComponent } from './components/clinic/create/create-clinic.component';
 import { ListClinicComponent } from './components/clinic/list/list-clinic.component';
+import { FollowupConfigurationComponent } from './components/configuration.followup/followup-configuration.component';
 import { FirstTimeTargetComponent } from './components/first.time.target/first-time-target.component';
 import { CreateUserComponent } from './components/user/create/create-user.component';
 import { ListUserComponent } from './components/user/list/list-user.component';
@@ -18,7 +19,15 @@ const routes: Routes = [{
       data: {
         title: 'First-Time-Configuration',
       },
-    },{
+    },
+    {
+      path:'config-followup',
+      component: FollowupConfigurationComponent,
+      data: {
+        title: 'First-Time-Configuration',
+      },
+    }
+    ,{
       path:'list/clinic',
       component: ListClinicComponent,
       data: {

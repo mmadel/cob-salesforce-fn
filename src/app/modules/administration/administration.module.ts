@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 import { AdministrationRoutingModule } from './administration-routing.module';
 import { SalesForceShareModule } from '../share/sales-force-share.module';
 import {
-FirstTimeTargetComponent,
-CreateClinicComponent,
-ListClinicComponent,
-CreateUserComponent,
-ListUserComponent
+  FirstTimeTargetComponent,
+  CreateClinicComponent,
+  ListClinicComponent,
+  CreateUserComponent,
+  ListUserComponent,
+  FollowupConfigurationComponent
 } from './index'
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { MultiSelectModule, TableModule } from '@coreui/angular-pro';
@@ -21,6 +22,7 @@ import { MultiSelectModule, TableModule } from '@coreui/angular-pro';
     ListClinicComponent,
     CreateUserComponent,
     ListUserComponent,
+    FollowupConfigurationComponent,
   ],
   imports: [
     CommonModule,
