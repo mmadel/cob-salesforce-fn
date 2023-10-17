@@ -31,6 +31,7 @@ export class AuthInterceptor implements HttpInterceptor {
           this.spinner.hide();
         }),
         catchError(error => {
+          console.log(JSON.stringify(error))
           if (error.status === 401) {
             this.kcAuthServiceService.logout();
           }

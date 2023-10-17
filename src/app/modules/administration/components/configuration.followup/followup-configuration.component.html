@@ -1,0 +1,97 @@
+<ngx-spinner></ngx-spinner>
+<c-container fluid>
+    <c-row class="justify-content-center">
+        <c-col class="col">
+            <c-card>
+                <c-card-header>
+                    <h1>Followup Configuration</h1>
+                </c-card-header>
+                <c-card-body>
+                    <table [striped]="true" cTable>
+                        <thead>
+                            <tr scope="row">
+                                <th scope="col">Impression</th>
+                                <th scope="col">First Follow-Up</th>
+                                <th scope="col">Next Follow-Up</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr scope="row">
+                                <td><strong>Good</strong></td>
+                                <td>
+                                    <select aria-label="Default select example" cSelect sizing="sm"
+                                        [(ngModel)]="followupConfiguration.firstTimeGood">
+                                        <option value="null">Select duration</option>
+                                        <option value="1">One Week</option>
+                                        <option value="2">Two Weeks</option>
+                                        <option value="3">Three Weeks</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select aria-label="Default select example" cSelect sizing="sm"
+                                        [(ngModel)]="followupConfiguration.nextTimeGood">
+                                        <option value="null">Select duration</option>
+                                        <option value="1">One Week</option>
+                                        <option value="2">Two Weeks</option>
+                                        <option value="3">Three Weeks</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr scope="row">
+                                <td><strong>Neutral</strong></td>
+                                <td>
+                                    <select aria-label="Default select example" cSelect sizing="sm"
+                                        [(ngModel)]="followupConfiguration.firstTimeNeutral">
+                                        <option value="null">Select duration</option>
+                                        <option value="1">One Week</option>
+                                        <option value="2">Two Weeks</option>
+                                        <option value="3">Three Weeks</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select aria-label="Default select example" cSelect sizing="sm"
+                                        [(ngModel)]="followupConfiguration.nextTimeNeutral">
+                                        <option value="null">Select duration</option>
+                                        <option value="1">One Week</option>
+                                        <option value="2">Two Weeks</option>
+                                        <option value="3">Three Weeks</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr scope="row">
+                                <td><strong>Not Worth</strong></td>
+                                <td>
+                                    <select aria-label="Default select example" cSelect sizing="sm"
+                                        [(ngModel)]="followupConfiguration.firstTimeNotWorth">
+                                        <option value="null">Select duration</option>
+                                        <option value="1">One Week</option>
+                                        <option value="2">Two Weeks</option>
+                                        <option value="3">Three Weeks</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select aria-label="Default select example" cSelect sizing="sm"
+                                        [(ngModel)]="followupConfiguration.nextTimeNotWorth">
+                                        <option value="null">Select duration</option>
+                                        <option value="1">One Week</option>
+                                        <option value="2">Two Weeks</option>
+                                        <option value="3">Three Weeks</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <div class="text-center">
+                                        <button cButton color="primary" variant="outline" class="mx-5"(click)="save()">Save</button>
+                                    </div>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </c-card-body>
+            </c-card>
+        </c-col>
+    </c-row>
+</c-container>
