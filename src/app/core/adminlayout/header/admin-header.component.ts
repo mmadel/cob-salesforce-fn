@@ -5,6 +5,7 @@ import { ClassToggleService, HeaderComponent } from '@coreui/angular-pro';
 import { Clinic } from 'src/app/modules/administration/model/clinic';
 import { ClinicService } from 'src/app/modules/administration/services/clinic/clinic.service';
 import { KcAuthService } from 'src/app/modules/security/service/kc/kc-auth.service';
+import { CacheService } from 'src/app/modules/share/services/cahce/cache.service';
 
 @Component({
   selector: 'app-admin-header',
@@ -35,17 +36,15 @@ export class AdminHeaderComponent extends HeaderComponent {
 
   constructor(private _classToggler: ClassToggleService, private router: Router
     , private ksAuthServiceService: KcAuthService
-    , private clinicService: ClinicService) {
+    , private clinicService: ClinicService
+    , private cahceService: CacheService) {
     super();
   }
   ngOnInit(): void {
-    this.ksAuthServiceService.loadUserProfile()
-    .then((userProfile) => {
-      this.userName = userProfile.username?.charAt(0).toUpperCase()
-      this.clinicService.getByUserId(userProfile.id).subscribe(response => {
-        this.clinics = response;
-        this.clinicService.selectedClinic$.next(this.clinics[0].id!)
-      })
+    this.userName = this.cahceService.getLoggedinUserName()?.charAt(0).toUpperCase()
+    this.clinicService.getByUserId(this.cahceService.getLoggedinUserUUID()).subscribe(response => {
+      this.clinics = response;
+      this.clinicService.selectedClinic$.next(this.clinics[0].id!)
     })
   }
 

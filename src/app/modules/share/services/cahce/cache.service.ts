@@ -9,6 +9,7 @@ export class CacheService {
 
   private selectedClinic: number;
   private loggedinUserUUID: string;
+  private loggedinUserName: string;
   constructor(private clinicService: ClinicService,
     @Optional() @SkipSelf() cacheService?: CacheService
   ) {
@@ -28,7 +29,16 @@ export class CacheService {
   getLoggedinUserUUID(): string {
     return this.loggedinUserUUID;
   }
+  getLoggedinUserName() {
+    return this.loggedinUserName;
+  }
   setLoggedinUserUUID(uuid: string) {
-    this.loggedinUserUUID = uuid;
+    if (this.loggedinUserUUID === undefined || this.loggedinUserUUID === null)
+      this.loggedinUserUUID = uuid;
+  }
+
+  setLoggedinUserName(userName: string) {
+    if (this.loggedinUserName === undefined || this.loggedinUserName === null)
+      this.loggedinUserName = userName;
   }
 }

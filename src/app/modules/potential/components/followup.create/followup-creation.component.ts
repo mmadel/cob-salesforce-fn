@@ -6,6 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { FollowUpType } from 'src/app/modules/followup/enum/followup.type';
 import { Followup } from 'src/app/modules/followup/models/followup.model';
 import { Doctor } from 'src/app/modules/share/model/doctor';
+import { CacheService } from 'src/app/modules/share/services/cahce/cache.service';
 import { ContactPosition } from '../../enums/contact.position';
 import { Impression } from '../../enums/followup.impression';
 import { FollowupCreationService } from '../../services/followup-creation.service';
@@ -24,7 +25,8 @@ export class FollowupCreationComponent implements OnInit {
   @ViewChild('followupCreateForm') followupCreateForm: NgForm;
   constructor(private followupCreationService: FollowupCreationService
     , private toastr: ToastrService
-    , private router: Router) {
+    , private router: Router
+    , private cacheService: CacheService) {
 
   }
   ngOnInit(): void {
@@ -67,8 +69,7 @@ export class FollowupCreationComponent implements OnInit {
     this.followup.dateOfVisit = Number(moment(this.followup.dateOfVisit_str).format("x"))
     this.followup.nextFollowupDate = Number(moment(this.followup.nextFollowupDate_str).format("x"))
     this.followup.user = {
-      id: 1,
-      uuid: 'e066f671-c714-40da-af03-b9c3252eb252'
+      uuid: this.cacheService.getLoggedinUserUUID()
     }
     this.followup.doctor = this.selectedpotentialDoctor;
   }

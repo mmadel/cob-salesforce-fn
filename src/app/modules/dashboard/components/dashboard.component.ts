@@ -25,8 +25,8 @@ export class DashboardComponent implements OnInit {
   ws: any;
   name: string;
   disabled: boolean;
-  clinicId: string = '1';
-  userUUId: string = 'e066f671-c714-40da-af03-b9c3252eb252';
+  clinicId: string = '';
+  userUUId: string = '';
   constructor(private dashboardService: DashboardService,
     private sanitizer: DomSanitizer,
     private kcAuthService: KcAuthService,

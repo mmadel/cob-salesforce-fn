@@ -7,6 +7,7 @@ import { ContactPosition } from 'src/app/modules/potential/enums/contact.positio
 import { Impression } from 'src/app/modules/potential/enums/followup.impression';
 import { FollowupCreationService } from 'src/app/modules/potential/services/followup-creation.service';
 import { Doctor } from 'src/app/modules/share/model/doctor';
+import { CacheService } from 'src/app/modules/share/services/cahce/cache.service';
 import { FollowUpType } from '../../enum/followup.type';
 import { Followup } from '../../models/followup.model';
 
@@ -25,7 +26,8 @@ export class FollowupCreationComponent implements OnInit {
   @ViewChild('followupCreateForm') followupCreateForm: NgForm;
   constructor(private followupCreationService: FollowupCreationService
     , private toastr: ToastrService
-    , private router: Router) {
+    , private router: Router
+    , private cacheService: CacheService) {
 
   }
   ngOnInit(): void {
@@ -68,8 +70,7 @@ export class FollowupCreationComponent implements OnInit {
     this.followup.dateOfVisit = Number(moment(this.followup.dateOfVisit_str).format("x"))
     this.followup.nextFollowupDate = Number(moment(this.followup.nextFollowupDate_str).format("x"))
     this.followup.user = {
-      id: 1,
-      uuid: 'e066f671-c714-40da-af03-b9c3252eb252'
+      uuid: this.cacheService.getLoggedinUserUUID()
     }
     this.followup.doctor = {
       uuid:this.doctorUUID,
