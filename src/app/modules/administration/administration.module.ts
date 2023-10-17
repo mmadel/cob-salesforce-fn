@@ -30,6 +30,7 @@ import { MultiSelectModule, TableModule } from '@coreui/angular-pro';
     SalesForceShareModule,
     TableModule,
     MultiSelectModule,
+    TableModule,
     NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })
