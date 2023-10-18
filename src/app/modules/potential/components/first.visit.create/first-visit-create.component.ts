@@ -3,6 +3,10 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { ToastrService } from 'ngx-toastr';
+import { filter, merge, switchMap } from 'rxjs';
+import { FollowupConfiguration } from 'src/app/modules/administration/model/followup.configuration';
+import { ClinicService } from 'src/app/modules/administration/services/clinic/clinic.service';
+import { FollowupConfigurationService } from 'src/app/modules/administration/services/followup.configuration/followup-configuration.service';
 import { Followup } from 'src/app/modules/followup/models/followup.model';
 import { CacheService } from 'src/app/modules/share/services/cahce/cache.service';
 import { ContactPosition } from '../../enums/contact.position';
@@ -21,13 +25,23 @@ export class FirstVisitCreateComponent implements OnInit {
   contactPositions = ContactPosition;
   userUUId: string;
   clinicId: string;
+  followupConfiguration: FollowupConfiguration;
   @ViewChild('firstVisitForm') firstVisitForm: NgForm;
   constructor(private followupCreationService: FollowupCreationService
     , private toastr: ToastrService
     , private router: Router
-    , private cacheService: CacheService) { }
+    , private cacheService: CacheService
+    , private clinicService: ClinicService
+    , private followupConfigurationService: FollowupConfigurationService) { }
 
   ngOnInit(): void {
+    merge(this.clinicService.selectedClinic$)
+      .pipe(
+        filter(selectedClinic => selectedClinic !== null),
+        switchMap(selectedClinic => this.followupConfigurationService.get(selectedClinic!)))
+      .subscribe((configuration) => {
+        this.followupConfiguration = configuration;
+      })
     this.firstVisit = {
       dateOfVisit: 0,
       impression: '',
@@ -54,11 +68,6 @@ export class FirstVisitCreateComponent implements OnInit {
       })
     }
   }
-  calculateDates() {
-    //read next followup date from backend
-    this.firstVisit.dateOfVisit_str = moment(new Date()).format("MM/DD/YYYY");
-    this.firstVisit.nextFollowupDate_str = moment(this.firstVisit.dateOfVisit_str).add(1, 'weeks').format("MM/DD/YYYY");
-  }
   populateModel() {
     this.firstVisit.doctor!.clinicId = this.cacheService.getSelectedClinic().toString()
     this.firstVisit.dateOfVisit = Number(moment(this.firstVisit.dateOfVisit_str).format("x"))
@@ -66,5 +75,21 @@ export class FirstVisitCreateComponent implements OnInit {
     this.firstVisit.user = {
       uuid: this.cacheService.getLoggedinUserUUID()
     }
+  }
+
+  public getNextFollowupDate() {
+    this.firstVisit.dateOfVisit_str = moment(new Date()).format("MM/DD/YYYY");
+    var configDuration: number = 0;
+    if (this.firstVisit.impression === 'Good')
+      configDuration = this.followupConfiguration.firstTimeGood!;
+    else if (this.firstVisit.impression === 'Neutral')
+      configDuration = this.followupConfiguration.firstTimeNeutral!;
+    else if (this.firstVisit.impression === 'Not_Worth')
+      configDuration = this.followupConfiguration.firstTimeNotWorth!;
+    else
+      configDuration = 0
+    if (configDuration !== 0)
+      this.firstVisit.nextFollowupDate_str = moment(this.firstVisit.dateOfVisit_str).add(configDuration, 'weeks').format("MM/DD/YYYY");
+
   }
 }

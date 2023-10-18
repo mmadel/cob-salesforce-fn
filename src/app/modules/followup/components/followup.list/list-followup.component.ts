@@ -54,7 +54,7 @@ export class ListFollowupComponent extends ListTemplate implements OnInit {
     this.historyVisible = event;
   }
   handleFollowupChange(event: any) {
-    this.followupCreationComponent?.calculateDates();
+    this.followupCreationComponent?.getNextFollowupDate();
     this.followupVisible = event;
   }
   closeHistoryModal() {
