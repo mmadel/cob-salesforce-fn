@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustHtml(`<b style="font-family:Lucida">Target is </b> <strong>${this.userFirstTimeVisitTarget}</strong>`);
   }
   connect() {
-    let socket = new WebSocket("ws://" + this.wsDomain + this.baseUrl);
+    let socket = new WebSocket("wss://" + this.wsDomain + this.baseUrl);
     this.ws = Stomp.over(socket);
 
     this.ws.connect({}, (frame: any) => {
