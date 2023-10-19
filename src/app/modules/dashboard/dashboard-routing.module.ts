@@ -4,19 +4,16 @@ import { DashboardComponent } from './components/dashboard.component';
 
 const routes: Routes = [
   {
-    path:'',
+    path: '',
+    redirectTo: 'dashboard',
+    pathMatch: 'full',
+  },
+  {
+    path: 'dashboard',
+    component: DashboardComponent,
     data: {
-      title: '',
-    },
-    children:[
-      {
-        path:'',
-        component: DashboardComponent,
-        data: {
-          title: '',
-        },
-      }
-    ]
+      title: 'Dashboard'
+    }
   }
 ];
 
