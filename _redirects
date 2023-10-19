@@ -1,0 +1,49 @@
+/salesforce-service/api/task/complete/first/clinicId/:clinicId https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/task/complete/first/clinicId/:clinicId 200
+/salesforce-service/api/task/complete/first/clinicId/:clinicId https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/task/complete/first/clinicId/:clinicId 200
+
+/salesforce-service/api/task/complete/followup/clinicId/:clinicId https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/task/complete/followup/clinicId/:clinicId 200
+
+
+/salesforce-service/api/potential/doctors/clinicId/:clinicId https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/potential/doctors/clinicId/:clinicId 200
+
+/salesforce-service/api/followup/doctors/clinicId/:clinicId https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/followup/doctors/clinicId/:clinicId 200
+
+/salesforce-service/api/followup/first https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/followup/first 200
+
+/salesforce-service/api/followup/history/doctorUUID/:doctorUUID/clinicId/:clinicId https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/followup/history/doctorUUID/:doctorUUID/clinicId/:clinicId 200
+
+/salesforce-service/api/followup/next https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/followup/next 200
+
+/salesforce-service/api/user/create https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/user/create 200
+
+/salesforce-service/api/user/create https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/user/create 200
+
+/salesforce-service/api/user/find https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/user/find 200
+
+/salesforce-service/api/user/find https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/user/find 200
+
+/salesforce-service/api/user/find/clinicId/:clinicId https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/user/find/clinicId/:clinicId 200
+
+/salesforce-service/api/user/find/clinics/userUUID/:userUUID https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/user/find/clinics/userUUID/:userUUID 200
+
+/salesforce-service/api/user/target/update https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/user/target/update 200
+
+/salesforce-service/api/counter/dashboard/clinicId/:clinicId/user/:userUUID https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/counter/dashboard/clinicId/:clinicId/user/:userUUID 200
+
+/salesforce-service/api/counter/followup/doctors/clinicId/:clinicId https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/counter/followup/doctors/clinicId/:clinicId 200
+
+/salesforce-service/api/counter/potentials/doctors/clinicId/:clinicId https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/counter/potentials/doctors/clinicId/:clinicId 200
+
+/salesforce-service/api/counter/potentials/doctors/clinicId/:clinicId https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/counter/potentials/doctors/clinicId/:clinicId 200
+
+/salesforce-service/api/test/scheduler https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/test/scheduler 200
+
+/salesforce-service/api/clinic/create https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/clinic/create 200
+
+/salesforce-service/api/clinic/find https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/clinic/find 200
+
+/salesforce-service/api/followup/configure/create https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/followup/configure/create 200
+
+/salesforce-service/api/followup/configure/find/clinicId/:clinicId https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/followup/configure/find/clinicId/:clinicId 200
+
+/salesforce-service/api/followup/configure/find/clinicId/:clinicId https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/followup/configure/find/clinicId/:clinicId 200
