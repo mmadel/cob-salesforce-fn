@@ -6,7 +6,7 @@ import { KCAuthGuard } from './modules/security/service/kc/kcauth.guard';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'administrator',
+    redirectTo: 'administrator/dashboard',
     pathMatch: 'full',
   },
   {
