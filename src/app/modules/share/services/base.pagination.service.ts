@@ -1,6 +1,7 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, debounceTime, distinctUntilChanged, Observable, retry, switchMap, throwError } from 'rxjs';
+import { ClinicService } from '../../administration/services/clinic/clinic.service';
 import { IApiParams } from '../../potential';
 import { PaginationData } from '../model/pagination.data';
 
@@ -16,7 +17,7 @@ const httpOptions = {
 })
 export class BasePaginationService {
   url: string;
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient, private clinicService: ClinicService) { }
   get(config$: BehaviorSubject<IApiParams>, url: string): Observable<any> {
     this.url = url;
     return config$.pipe(
@@ -37,12 +38,15 @@ export class BasePaginationService {
     const options = Object.keys(httpParams).length
       ? { params: httpParams, ...httpOptions }
       : { params: {}, ...httpOptions };
-    return this.httpClient
-      .get<PaginationData>(this.url, options)
-      .pipe(
-        retry({ count: 1, delay: 100000, resetOnSuccess: true }),
-        catchError(this.handleHttpError)
-      );
+    return this.clinicService.selectedClinic$.pipe(
+      switchMap(clinicId =>
+        this.httpClient
+          .get<PaginationData>(this.url + clinicId, options)
+          .pipe(
+            retry({ count: 1, delay: 100000, resetOnSuccess: true }),
+            catchError(this.handleHttpError)
+          )
+      ));
   }
   private handleHttpError(error: HttpErrorResponse) {
     return throwError(() => error);

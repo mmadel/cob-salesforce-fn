@@ -1,9 +1,12 @@
 import { Component, OnInit, SecurityContext } from '@angular/core';
-import { merge } from 'rxjs';
+import { combineLatest, filter, from, merge, switchMap, tap } from 'rxjs';
 import { DashboardCounters } from '../models/dashboar.counters';
 import { DashboardService } from '../services/dashboard.service';
 import * as Stomp from 'stompjs';
 import { DomSanitizer } from '@angular/platform-browser';
+import { KcAuthService } from '../../security/service/kc/kc-auth.service';
+import { ClinicService } from '../../administration/services/clinic/clinic.service';
+import { CacheService } from '../../share/services/cahce/cache.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -22,23 +25,37 @@ export class DashboardComponent implements OnInit {
   ws: any;
   name: string;
   disabled: boolean;
-  clinicId: string = '1';
-  userUUId:string = 'e066f671-c714-40da-af03-b9c3252eb252';
-  constructor(private dashboardService: DashboardService , private sanitizer: DomSanitizer) { }
+  clinicId: string = '';
+  userUUId: string = '';
+  constructor(private dashboardService: DashboardService,
+    private sanitizer: DomSanitizer,
+    private kcAuthService: KcAuthService,
+    private clinicService: ClinicService,
+    private cacheService: CacheService) { }
 
   ngOnInit(): void {
-    this.dashboardService.getDashboardCounters("1", "e066f671-c714-40da-af03-b9c3252eb252")
+    combineLatest([from(this.kcAuthService.loadUserProfile()), this.clinicService.selectedClinic$])
+      .pipe(
+        filter((result) => result[1] !== null),
+        tap((result) => 
+        {
+          this.cacheService.setLoggedinUserUUID(this.userUUId);
+          this.userUUId = result[0].id!;
+          this.clinicId = result[1] !== null ? result[1].toString() : ""
+        }),
+        switchMap(result => this.dashboardService.getDashboardCounters(result[1] !== null ? result[1].toString() : "", result[0].id!))
+      )
       .subscribe((response) => {
         this.potentialDoctorsCounter = response.potentialDoctorsCounter + ''
         this.followupDoctorsCounter = response.followupDoctorsCounter + ''
         this.userAchievement = response.userAchievement + ''
         this.userFirstTimeVisitTarget = response.userFirstTimeVisitTarget + ''
-        this.userFirstTimeVisitAchievement = response.userFirstTimeVisitAchievement + '' 
+        this.userFirstTimeVisitAchievement = response.userFirstTimeVisitAchievement + ''
       })
     this.connect();
   }
-  getFirstVisitTargetAsHTML(){
-    return  this.sanitizer.bypassSecurityTrustHtml(`<b style="font-family:Lucida">Target is </b> <strong>${this.userFirstTimeVisitTarget}</strong>`);
+  getFirstVisitTargetAsHTML() {
+    return this.sanitizer.bypassSecurityTrustHtml(`<b style="font-family:Lucida">Target is </b> <strong>${this.userFirstTimeVisitTarget}</strong>`);
   }
   connect() {
     let socket = new WebSocket("ws://localhost:8080/salesforce-service/api/counters");

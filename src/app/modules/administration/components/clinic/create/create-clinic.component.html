@@ -1,0 +1,27 @@
+<c-container fluid>
+    <c-row class="justify-content-center">
+        <c-col class="col">
+            <c-card>
+                <c-card-header>
+                    <h1>Clinic Creation</h1>
+                </c-card-header>
+                <c-card-body>
+                    <form cForm #createClinicForm="ngForm" (ngSubmit)="create()" (change)="resetError()">
+                        <div class="form-group" class="mb-3">
+                            <small *ngIf="submitted  && (clinicname.errors) || (clinicname.invalid && (clinicname.dirty || clinicname.touched))" class="form-text text-danger">
+                                Clinic Name required
+                              </small>
+                              <input cFormControl id="clinicname" name="clinicname" placeholder="Clinic Name" required  
+                                [(ngModel)]="clinic.name" #clinicname="ngModel" />
+                        </div>
+                        <div class="text-center">
+                            <button cButton type="submit" size="sm" color="primary" variant="outline">
+                                Save
+                            </button>
+                        </div>
+                    </form>
+                </c-card-body>
+            </c-card>
+        </c-col>
+    </c-row>
+</c-container>

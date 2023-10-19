@@ -7,7 +7,6 @@ import { DatePickerModule, ModalModule, SmartPaginationModule, SmartTableModule 
 import { NgxSpinnerModule } from 'ngx-spinner';
 import {
   FollowupCreationComponent,
-  ConfigureFollowupComponent,
   ListFollowupComponent,
   FollowupHistoryComponent,
 } from './index'
@@ -15,7 +14,6 @@ import {
 
 
 const FOLLOWUP_COMPONENT = [
-  ConfigureFollowupComponent,
   ListFollowupComponent,
   FollowupHistoryComponent,
   FollowupCreationComponent

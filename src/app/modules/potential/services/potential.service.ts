@@ -1,9 +1,10 @@
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { tap } from 'lodash';
 import { BehaviorSubject, catchError, debounceTime, distinctUntilChanged, Observable, retry, switchMap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ClinicService } from '../../administration/services/clinic/clinic.service';
 import { Doctor } from '../../share/model/doctor';
-import { ClinicService } from '../../share/services/clinic.service';
 import { IApiParams } from '../components/list-potential-doctor.component';
 const httpOptions = {
   // headers: new HttpHeaders({
@@ -48,7 +49,7 @@ export class PotentialService {
     return this.clinicService.selectedClinic$.pipe(
       switchMap(clinicId =>
         this.httpClient
-          .get<IData>(this.baseUrl + "/doctors/clinicId/" + 1, options)
+          .get<IData>(this.baseUrl + "/doctors/clinicId/" + clinicId, options)
           .pipe(
             retry({ count: 1, delay: 100000, resetOnSuccess: true }),
             catchError(this.handleHttpError)

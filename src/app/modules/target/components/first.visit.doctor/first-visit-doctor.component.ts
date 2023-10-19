@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { combineLatest, filter, merge, switchMap, tap } from 'rxjs';
+import { ClinicService } from 'src/app/modules/administration/services/clinic/clinic.service';
 import { CompletedTask } from '../../model/completed.task.mode';
 import { CompleteTaskService } from '../../services/complete-task.service';
 
@@ -9,13 +11,16 @@ import { CompleteTaskService } from '../../services/complete-task.service';
 })
 export class FirstVisitDoctorComponent implements OnInit {
 
-  clinicId: string = '1';
+
   tasks: CompletedTask[];
-  constructor(private completeTaskService: CompleteTaskService) { }
+  constructor(private completeTaskService: CompleteTaskService, private clinicService: ClinicService) { }
 
   ngOnInit(): void {
-    this.completeTaskService.getCompletedFirstVisitTask(this.clinicId)
-      .subscribe((response) => {
+    merge(this.clinicService.selectedClinic$)
+      .pipe(
+        filter((selectedClinic) => selectedClinic !== null),
+        switchMap(selectedClinic => this.completeTaskService.getCompletedFirstVisitTask(selectedClinic!.toString()))
+      ).subscribe((response)=>{
         this.tasks = response;
       }, (error) => {
         console.log(JSON.stringify(error))

@@ -8,6 +8,7 @@ import {
 } from './index'
 import { SalesForceShareModule } from '../share/sales-force-share.module';
 import { WidgetModule } from '@coreui/angular-pro';
+import { NgxSpinnerModule } from 'ngx-spinner';
 
 const DASHBOARD_COMPONENT = [
   DashboardComponent
@@ -19,7 +20,8 @@ const DASHBOARD_COMPONENT = [
     CommonModule,
     SalesForceShareModule,
     WidgetModule,
-    DashboardRoutingModule
+    DashboardRoutingModule,
+    NgxSpinnerModule.forRoot({ type: 'ball-scale-multiple' })
   ]
 })
 export class DashboardModule { }

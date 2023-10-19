@@ -1,7 +1,12 @@
-import { Component, Input } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ClassToggleService, HeaderComponent } from '@coreui/angular-pro';
+import { KeycloakService } from 'keycloak-angular';
+import { Clinic } from 'src/app/modules/administration/model/clinic';
+import { ClinicService } from 'src/app/modules/administration/services/clinic/clinic.service';
+import { KcAuthService } from 'src/app/modules/security/service/kc/kc-auth.service';
+import { CacheService } from 'src/app/modules/share/services/cahce/cache.service';
 
 @Component({
   selector: 'app-admin-header',
@@ -11,8 +16,10 @@ import { ClassToggleService, HeaderComponent } from '@coreui/angular-pro';
 
 
 export class AdminHeaderComponent extends HeaderComponent {
-
+  clinics: Clinic[] = new Array();
+  selectedClinicId: number;
   userName: string | undefined;
+  @ViewChild('userClinics') userClinics: ElementRef;
   public get classToggler(): ClassToggleService {
     return this._classToggler;
   }
@@ -28,11 +35,33 @@ export class AdminHeaderComponent extends HeaderComponent {
     themeSwitchRadio: new UntypedFormControl('light'),
   });
 
-  constructor(private _classToggler: ClassToggleService, private router: Router) {
+  constructor(private _classToggler: ClassToggleService, private router: Router
+    , private ksAuthServiceService: KcAuthService
+    , private clinicService: ClinicService
+    , private keycloakService: KeycloakService
+    , private cacheService: CacheService) {
     super();
   }
   ngOnInit(): void {
+    this.keycloakService.isLoggedIn()
+      .then((loggedIn) => {
+        console.log('is LoggedIn ' + loggedIn)
+        if (loggedIn) {
+          this.keycloakService.loadUserProfile()
+            .then((userProfile) => {
 
+              console.log('uuid  ' + userProfile.id!)
+              console.log('username  ' + userProfile.username!)
+              this.cacheService.setLoggedinUserUUID(userProfile.id!)
+              this.cacheService.setLoggedinUserName(userProfile.username!);
+              this.userName = this.cacheService.getLoggedinUserName()?.charAt(0).toUpperCase()
+              this.clinicService.getByUserId(this.cacheService.getLoggedinUserUUID()).subscribe(response => {
+                this.clinics = response;
+                this.clinicService.selectedClinic$.next(this.clinics[0].id!)
+              })
+            })
+        }
+      })
   }
 
   setTheme(value: string): void {
@@ -40,10 +69,10 @@ export class AdminHeaderComponent extends HeaderComponent {
     this.classToggler.toggle('body', 'dark-theme');
   }
   logout() {
-
+    this.ksAuthServiceService.logout()
   }
   setSelectedClinic(event: any) {
-
+    this.clinicService.selectedClinic$.next(event.target.value)
   }
   startDateChange(event: any) {
 

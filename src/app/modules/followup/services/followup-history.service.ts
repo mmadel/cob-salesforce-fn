@@ -14,7 +14,6 @@ export class FollowupHistoryService {
   constructor(private httpClient: HttpClient) { }
 
   findHistory(doctorUUID:string,clinicId:string ){
-    clinicId = "1";
     const historyFollowupURL = this.baseUrl + '/history/doctorUUID/'+doctorUUID+'/clinicId/'+clinicId
     return this.httpClient.get(historyFollowupURL).pipe(
       map((response: any) => <FollowupHistory[]>response));

@@ -179,11 +179,11 @@ export class ListPotentialDoctorComponent implements OnInit {
     this.activePage$.next(page);
   }
   handleLiveDemoChange(event: any) {
-    this.followupCreationComponent?.calculateDates();
+    this.followupCreationComponent?.getNextFollowupDate();
     this.followupVisible = event;
   }
   handleFirstVisitChange(event: any) {
-    this.firstVisitCreateComponent?.calculateDates();
+    this.firstVisitCreateComponent?.getNextFollowupDate();
     this.firstVisible = event;
   }
   closeFirstVisitModal() {

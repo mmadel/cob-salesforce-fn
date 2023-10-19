@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { filter, merge, switchMap } from 'rxjs';
+import { ClinicService } from 'src/app/modules/administration/services/clinic/clinic.service';
 import { CompletedTask } from '../../model/completed.task.mode';
 import { CompleteTaskService } from '../../services/complete-task.service';
 
@@ -11,15 +13,19 @@ export class VisitedDoctorComponent implements OnInit {
 
   clinicId: string = '1';
   tasks:CompletedTask[];
-  constructor(private completeTaskService: CompleteTaskService) { }
+  constructor(private completeTaskService: CompleteTaskService , private clinicService:ClinicService) { }
 
   ngOnInit(): void {
-    this.completeTaskService.getCompletedFollowupTask(this.clinicId)
-    .subscribe((response) => {
-      this.tasks = response;
-    }, (error) => {
-
-    })
+    merge(this.clinicService.selectedClinic$)
+      .pipe(
+        filter((selectedClinic) => selectedClinic !== null),
+        switchMap(selectedClinic => this.completeTaskService.getCompletedFollowupTask(selectedClinic!.toString()))
+      ).subscribe((response)=>{
+        this.tasks = response;
+      }, (error) => {
+        console.log(JSON.stringify(error))
+      })
   }
+  
 
 }

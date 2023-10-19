@@ -1,3 +1,4 @@
+<ngx-spinner></ngx-spinner>
 <c-container fluid>
     <c-row class="justify-content-center">
       <c-col class="col">
@@ -15,7 +16,7 @@
               Impression is required
             </small>
             <select cSelect sizing="sm" cFormControl name="impression" id="impression" required
-              [(ngModel)]="followup.impression" #impression="ngModel">
+              [(ngModel)]="followup.impression" #impression="ngModel" (change)="getNextFollowupDate()">
               <option value="">Select Impression</option>
               <option *ngFor="let impression of impressions | keyvalue" [value]="impression.key">
                 {{impression.value}}
