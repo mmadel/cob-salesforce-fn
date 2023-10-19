@@ -7,6 +7,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { KcAuthService } from '../../security/service/kc/kc-auth.service';
 import { ClinicService } from '../../administration/services/clinic/clinic.service';
 import { CacheService } from '../../share/services/cahce/cache.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,7 +15,8 @@ import { CacheService } from '../../share/services/cahce/cache.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-
+  private baseUrl = environment.baseURL + 'counters'
+  private wsDomain = environment.wsdomain;
   dashboardCounters: DashboardCounters;
   potentialDoctorsCounter: string
   followupDoctorsCounter: string
@@ -37,8 +39,7 @@ export class DashboardComponent implements OnInit {
     combineLatest([from(this.kcAuthService.loadUserProfile()), this.clinicService.selectedClinic$])
       .pipe(
         filter((result) => result[1] !== null),
-        tap((result) => 
-        {
+        tap((result) => {
           this.cacheService.setLoggedinUserUUID(this.userUUId);
           this.userUUId = result[0].id!;
           this.clinicId = result[1] !== null ? result[1].toString() : ""
@@ -58,7 +59,7 @@ export class DashboardComponent implements OnInit {
     return this.sanitizer.bypassSecurityTrustHtml(`<b style="font-family:Lucida">Target is </b> <strong>${this.userFirstTimeVisitTarget}</strong>`);
   }
   connect() {
-    let socket = new WebSocket("ws://localhost:8080/salesforce-service/api/counters");
+    let socket = new WebSocket("ws://" + this.wsDomain + this.baseUrl);
     this.ws = Stomp.over(socket);
 
     this.ws.connect({}, (frame: any) => {

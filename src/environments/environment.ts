@@ -7,6 +7,7 @@ import keycloakConfig from "./keycloak.config";
 export const environment = {
   production: false,
   baseURL:"/salesforce-service/api/",
+  wsdomain:"localhost:8080",
   keycloak: keycloakConfig,
 };
 
