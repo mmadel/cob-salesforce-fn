@@ -47,3 +47,4 @@
 /salesforce-service/api/followup/configure/find/clinicId/:clinicId https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/followup/configure/find/clinicId/:clinicId 200
 
 /salesforce-service/api/followup/configure/find/clinicId/:clinicId https://sales-service-25bf3634a2d0.herokuapp.com/salesforce-service/api/followup/configure/find/clinicId/:clinicId 200
+/*  /index.html   200
